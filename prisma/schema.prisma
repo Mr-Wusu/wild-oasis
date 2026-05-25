@@ -1,0 +1,49 @@
+
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+// Your models remain completely untouched
+model User {
+  id    String @id @default(cuid())
+  email String @unique
+  password String
+  firstname String
+  surname String
+  role Role @default(USER)
+  cabin Cabin[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+  @@index([email])
+  @@index([role])
+}
+
+model Cabin {
+  id String @id @default(cuid())
+  discount Int
+  name String
+  maxCapacity Int
+  numGuard Int
+  image String
+  userid String
+  regularPrice Int
+  description String
+  guest User @relation(fields: [userid], references: [id], onDelete: Cascade)
+
+  @@map("cabins")
+  @@index([name])
+}
+
+enum Role {
+  ADMIN
+  TEST_ADMIN
+  USER
+}

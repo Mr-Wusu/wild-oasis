@@ -1,0 +1,35 @@
+
+@import "tailwindcss";
+
+@theme {
+  /* Primary */
+  --color-primary-1: #f4fce3;
+  --color-primary-2: #e9fac8;
+  --color-primary-3: #d8f5a2;
+  --color-primary-4: #c0eb75;
+  --color-primary-5: #a9e34b;
+  --color-primary-6: #94d82d;
+  --color-primary-7: #82c91e;
+  --color-primary-8: #74b816;
+  --color-primary-9: #66a80f;
+  --color-primary-10: #5c940d;
+
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-notoSans: "Noto Sans", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
+  --font-josefineSans: "Josefin Sans", sans-serif;
+  --font-logo: "Kolker Brush", sans-serif;
+}
+
+.center_page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.padding-x {
+  padding-left: 40px;
+  padding-right: 40px;
+}
