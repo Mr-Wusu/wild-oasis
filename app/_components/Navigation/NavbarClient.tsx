@@ -12,17 +12,25 @@ const navLinks = [
   { href: "/guests", label: "Guest Area" },
 ];
 
+// ✅ Full class strings so Tailwind JIT can detect them at build time
+const staggerDelays = [
+  "delay-[80ms]",
+  "delay-[140ms]",
+  "delay-[200ms]",
+  "delay-[260ms]",
+] as const;
+
 function NavbarClient() {
   const { isHomePage, isScrolled } = useHomePage();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
-  // Close menu on route change
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    if (menuOpen) setMenuOpen(false);
+  }
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -34,7 +42,6 @@ function NavbarClient() {
 
   return (
     <>
-      {/* ─── Main Header ─────────────────────────────────────────────────────── */}
       <header
         className={`
           fixed w-full z-50 px-4 md:px-8 py-3 md:py-2.5
@@ -49,7 +56,6 @@ function NavbarClient() {
       >
         <Logo />
 
-        {/* ── Desktop Nav ───────────────────────────────────────────────────── */}
         <ul className="hidden md:flex items-center space-x-1 text-xl font-josefineSans">
           {navLinks.map(({ href, label }) => (
             <li key={href}>
@@ -76,20 +82,19 @@ function NavbarClient() {
           ))}
         </ul>
 
-        {/* ── Hamburger Button (mobile only) ───────────────────────────────── */}
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
+          type="button"
           className={`
-            md:hidden flex flex-col justify-center items-center
-            w-10 h-10 gap-1.5 rounded-sm z-60
-            focus:outline-none focus:ring-2 ring-primary-9
-            transition-colors duration-200
-            ${isTransparent && !menuOpen ? "text-primary-4" : "text-primary-10"}
-          `}
+    md:hidden flex flex-col justify-center items-center
+    w-10 h-10 gap-1.5 rounded-sm z-60
+    focus:outline-none focus:ring-2 ring-primary-9
+    transition-colors duration-200
+    ${isTransparent && !menuOpen ? "text-primary-4" : "text-primary-10"}
+  `}
         >
-          {/* Three bars that morph into an X */}
           <span
             className={`
               block h-0.5 w-6 rounded-full bg-current
@@ -114,7 +119,6 @@ function NavbarClient() {
         </button>
       </header>
 
-      {/* ─── Mobile Drawer Overlay ───────────────────────────────────────────── */}
       <div
         onClick={() => setMenuOpen(false)}
         className={`
@@ -125,7 +129,6 @@ function NavbarClient() {
         aria-hidden="true"
       />
 
-      {/* ─── Mobile Drawer Panel ─────────────────────────────────────────────── */}
       <nav
         aria-label="Mobile navigation"
         className={`
@@ -137,19 +140,20 @@ function NavbarClient() {
           ${menuOpen ? "translate-x-0" : "translate-x-full"}
         `}
       >
-        {/* Decorative accent line */}
         <span className="block w-10 h-0.5 bg-accent-500 mb-8" />
 
         <ul className="flex flex-col gap-1 font-josefineSans">
           {navLinks.map(({ href, label }, index) => (
             <li
               key={href}
-              style={{
-                transitionDelay: menuOpen ? `${index * 60 + 80}ms` : "0ms",
-              }}
+              // ✅ Fix: Tailwind arbitrary class replaces inline style entirely
               className={`
                 transition-all duration-300
-                ${menuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"}
+                ${
+                  menuOpen
+                    ? `opacity-100 translate-x-0 ${staggerDelays[index]}`
+                    : "opacity-0 translate-x-6 delay-[0ms]"
+                }
               `}
             >
               <Link
@@ -163,7 +167,6 @@ function NavbarClient() {
                   ${pathname === href ? "text-accent-600 font-semibold" : ""}
                 `}
               >
-                {/* Active indicator dot */}
                 <span
                   className={`
                     w-1.5 h-1.5 rounded-full bg-accent-500 shrink-0
@@ -177,7 +180,6 @@ function NavbarClient() {
           ))}
         </ul>
 
-        {/* Bottom decoration */}
         <div className="mt-auto">
           <span className="block w-6 h-0.5 bg-accent-500/40 mb-2" />
           <span className="block w-12 h-0.5 bg-accent-500/20" />

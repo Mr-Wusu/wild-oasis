@@ -57,3 +57,8 @@ export async function deleteImage(imageUrl: string): Promise<boolean> {
     return false;
   }
 }
+
+export function getBlurDataURL(src: string): string {
+  // Inserts "/w_10,q_10,e_blur:200/" before the version segment
+  return src.replace("/upload/", "/upload/w_10,q_10,e_blur:200/");
+}

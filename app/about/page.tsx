@@ -1,14 +1,26 @@
 import Image from "next/image";
-
+import Link from "next/link";
+import about1 from "@/public/about-1.jpg"
+import about2 from "@/public/about-2.jpg"
 export default function About() {
   return (
-    <div className="grid grid-cols-6 gap-x-15 gap-y-32 text-lg items-center px-16 font-josefineSans text-primary-10 py-28">
-      <div className="col-span-3">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+    <div
+      className="grid grid-cols-1 gap-y-16 text-base items-center px-6 py-16 font-josefineSans text-primary-10
+                    sm:px-10 sm:py-20 sm:text-lg
+                    md:grid-cols-6 md:gap-x-10 md:gap-y-24 md:px-12
+                    lg:gap-x-15 lg:gap-y-32 lg:px-16 lg:py-28
+                    min-:px-16"
+    >
+      {/* Text Block 1 */}
+      <div className="md:col-span-3 lg:col-span-3">
+        <h1
+          className="text-3xl mb-6 text-accent-400 font-medium
+                       sm:text-4xl sm:mb-10"
+        >
           Welcome to The Wild Oasis
         </h1>
 
-        <div className="space-y-7">
+        <div className="space-y-5 sm:space-y-7">
           <p>
             Where nature&lsquo;s beauty and comfortable living blend seamlessly.
             Hidden away in the heart of the Italian Dolomites, this is your
@@ -30,31 +42,52 @@ export default function About() {
         </div>
       </div>
 
-      <div className="col-span-2 relative h-99 w-143">
+
+      <div
+        className="relative h-64 w-full
+                      sm:h-80
+                      md:col-span-3 md:h-96
+                      lg:col-span-3 lg:h-99 lg:w-full
+                      min-:w-"
+      >
         <div className="absolute top-0 left-0 w-full h-full bg-linear-to-r from-primary-3/10 to-primary-5/10 z-40 pointer-events-none" />
         <Image
-          src="/about-1.jpg"
+          src={about1}
           alt="Family sitting around a fire pit in front of cabin"
           fill
           className="object-cover"
+          placeholder="blur"
         />
       </div>
 
-      <div className="col-span-2 relative h-105 w-143">
+  
+      <div
+        className="relative h-64 w-full
+                      sm:h-80
+                      md:col-span-3 md:h-96
+                      lg:col-span-3 lg:h-105 lg:w-full
+                      min-:w-"
+      >
         <div className="absolute top-0 left-0 w-full h-full bg-linear-to-r from-primary-3/10 to-primary-5/10 z-40 pointer-events-none" />
         <Image
           fill
-          src="/about-2.jpg"
+          src={about2}
           alt="Family that manages The Wild Oasis"
+          className="object-cover"
+          placeholder="blur"
         />
       </div>
 
-      <div className="col-span-3 col-start-4">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+      {/* Text Block 2 */}
+      <div className="md:col-span-3 md:col-start-4 lg:col-span-3 lg:col-start-4">
+        <h1
+          className="text-3xl mb-6 text-accent-400 font-medium
+                       sm:text-4xl sm:mb-10"
+        >
           Managed by our family since 1962
         </h1>
 
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           <p>
             Since 1962, The Wild Oasis has been a cherished family-run retreat.
             Started by our grandparents, this haven has been nurtured with love
@@ -71,12 +104,13 @@ export default function About() {
           </p>
 
           <div>
-            <a
+            <Link
               href="/cabins"
-              className="inline-block mt-4 bg-accent-500 px-8 py-3 text-primary-10 hover:text-primary-8 text-lg font-semibold hover:bg-accent-600 transition-all"
+              className="inline-block mt-2 bg-accent-500 px-6 py-3 text-primary-10 hover:text-primary-8 text-base font-semibold hover:bg-accent-600 transition-all
+                         sm:mt-4 sm:px-8 sm:text-lg"
             >
               Explore our luxury cabins
-            </a>
+            </Link>
           </div>
         </div>
       </div>

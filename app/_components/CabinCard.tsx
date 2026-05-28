@@ -1,6 +1,7 @@
 import { UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { Cabin } from "@/generated/prisma";
+import { getBlurDataURL } from "@/lib/cloudinary";
 
 type CabinCardProps = {
   cabin: Cabin;
@@ -10,11 +11,6 @@ function CabinCard({ cabin }: CabinCardProps) {
   const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
 
   return (
-    // Layout:
-    // < 640px  → flex-col  (image top, text bottom) — single column grid
-    // 640px+   → flex-row  (image left, text right) — single column grid
-    // 1024px+  → flex-row  (image left, text right) — 2-column grid, fixed 464×269
-    // 1200px+  → flex-col  (image top, text bottom) — 3-column grid, auto size
     <div
       className="
       flex flex-col max-w-100
@@ -25,11 +21,6 @@ function CabinCard({ cabin }: CabinCardProps) {
       group transition-all duration-300 hover:border-primary-700
     "
     >
-      {/* Image */}
-      {/* < 640px  → full width, fixed height 180px */}
-      {/* 640px+   → fixed width 180px, auto height (fills flex-row) */}
-      {/* 1024px+  → fixed width 160px, full 269px height */}
-      {/* 1200px+  → full width, fixed height 160px */}
       <div
         className="
         relative h-50 w-full shrink-0 overflow-hidden
@@ -44,6 +35,8 @@ function CabinCard({ cabin }: CabinCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1200px) 180px, 33vw"
+          placeholder="blur"
+          blurDataURL={getBlurDataURL(image)}
         />
       </div>
 
