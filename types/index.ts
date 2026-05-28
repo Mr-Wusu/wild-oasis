@@ -32,6 +32,5 @@ export interface Cabin {
   name: string;
   maxCapacity: number;
   image: string;
-  description: string;
   regularPrice: number;
 }

@@ -8,7 +8,8 @@ import {
 } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { Role } from "../generated/prisma";
-// import { User } from "../generated/prisma";
+import { cookies } from "next/headers";
+
 
 export async function registerUser(data: {
   firstname: string;
@@ -58,6 +59,19 @@ export async function loginUser(data: { email: string; password: string }) {
     },
   };
 }
+
+export async function logoutUser() {
+  const cookieStore = await cookies();
+
+  cookieStore.set("token", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: 0,
+  });
+
+}
+
 export const getUsers = 
   async () => {
     const user = await getCurrentuser()
@@ -68,86 +82,28 @@ export const getUsers =
       orderBy: { createdAt: "desc" },
     });
   }
- 
 
-
-export async function storeCloth(data: {
-  imageUrl: string;
+export async function createCabin(data: {
+  name: string;
+  maxCapacity: number;
+  numGuard: number;
+  regularPrice: number;
+  discount: number;
   description: string;
-  price: number;
-  altTag: string;
+  image: string; // Cloudinary URL or placeholder for seeding
 }) {
-  try {
-    const { imageUrl, description, price, altTag } = data;
-    // Check if user exists
-    const user = await getCurrentuser();
-    if (!user) throw new Error("Please sign in to make such request");
-    // Check that user behind request has admin rights
-    const hasRight = checkUserPermission(user, Role.TEST_ADMIN);
-    if (!hasRight) throw new Error("You have no such priviledge!");
-
-    await prisma.cloth.create({
-      data: {
-        imageUrl,
-        description,
-        price,
-        altTag,
-      },
-    });
-    return { success: true, message: "Cloth uploaded successfully" };
-  } catch (err) {
-    console.error(`Storing cloth error: ${err}`);
-    return { success: false, error: "Cloth upload failed" };
-  }
+  return prisma.cabin.create({ data });
 }
 
-export async function getClothById(id: string) {
-  try {
-    const cloth = await prisma.cloth.findUnique({
-      where: { id },
-    });
-    if (!cloth) {
-      return { success: false, error: "Cloth not found" };
-    }
-    return { success: true, cloth };
-  } catch (error) {
-    console.error("Error fetching cloth by ID:", error);
-    return { success: false, error: "Failed to fetch cloth" };
+  export async function getCabins() {
+    return prisma.cabin.findMany()
   }
-}
 
-export async function editClothDB(data: {
-  clothId: string;
-  imageUrl?: string;
-  description?: string;
-  price?: number;
-  altTag?: string;
-}) {
-  const { clothId, ...updateData } = data;
-  try {
-    const updatedCloth = await prisma.cloth.update({
-      where: { id: clothId },
-      data: updateData,
-    });
-    return { success: true, cloth: updatedCloth };
-  } catch (error) {
-    console.error("Error editing cloth:", error);
-    return { success: false, error: "Failed to update cloth" };
-  }
-}
+  export async function getAvailableCabins() {}
 
-export async function deleteClothDB(id: string) {
-  try {
-    const cloth = await prisma.cloth.findUnique({ where: { id } });
-    if (!cloth) return { success: false, error: "Cloth not found" };
+  export async function getOccupiedCabins() {}
 
-    // Delete from DB directly without cache wrapping
-    await prisma.cloth.delete({ where: { id } });
 
-    return { success: true, imageUrl: cloth.imageUrl };
-  } catch (error) {
-    console.error("Delete error:", error);
-    return { success: false, error: "Failed to delete cloth" };
-  }
-}
+
+
 

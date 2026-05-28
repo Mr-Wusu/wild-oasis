@@ -970,36 +970,6 @@ export namespace Prisma {
    */
 
 
-  /**
-   * Count Type UserCountOutputType
-   */
-
-  export type UserCountOutputType = {
-    cabin: number
-  }
-
-  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    cabin?: boolean | UserCountOutputTypeCountCabinArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserCountOutputType
-     */
-    select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountCabinArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CabinWhereInput
-  }
-
 
   /**
    * Models
@@ -1194,7 +1164,6 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     cabin?: boolean | User$cabinArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1233,7 +1202,6 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "firstname" | "surname" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cabin?: boolean | User$cabinArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1241,7 +1209,7 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      cabin: Prisma.$CabinPayload<ExtArgs>[]
+      cabin: Prisma.$CabinPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1646,7 +1614,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    cabin<T extends User$cabinArgs<ExtArgs> = {}>(args?: Subset<T, User$cabinArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CabinPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    cabin<T extends User$cabinArgs<ExtArgs> = {}>(args?: Subset<T, User$cabinArgs<ExtArgs>>): Prisma__CabinClient<$Result.GetResult<Prisma.$CabinPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2093,11 +2061,6 @@ export namespace Prisma {
      */
     include?: CabinInclude<ExtArgs> | null
     where?: CabinWhereInput
-    orderBy?: CabinOrderByWithRelationInput | CabinOrderByWithRelationInput[]
-    cursor?: CabinWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CabinScalarFieldEnum | CabinScalarFieldEnum[]
   }
 
   /**
@@ -2327,7 +2290,7 @@ export namespace Prisma {
     maxCapacity: number
     numGuard: number
     image: string
-    userid: string
+    userid: string | null
     regularPrice: number
     description: string
     _count: CabinCountAggregateOutputType | null
@@ -2361,7 +2324,7 @@ export namespace Prisma {
     userid?: boolean
     regularPrice?: boolean
     description?: boolean
-    guest?: boolean | UserDefaultArgs<ExtArgs>
+    guest?: boolean | Cabin$guestArgs<ExtArgs>
   }, ExtArgs["result"]["cabin"]>
 
   export type CabinSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2374,7 +2337,7 @@ export namespace Prisma {
     userid?: boolean
     regularPrice?: boolean
     description?: boolean
-    guest?: boolean | UserDefaultArgs<ExtArgs>
+    guest?: boolean | Cabin$guestArgs<ExtArgs>
   }, ExtArgs["result"]["cabin"]>
 
   export type CabinSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2387,7 +2350,7 @@ export namespace Prisma {
     userid?: boolean
     regularPrice?: boolean
     description?: boolean
-    guest?: boolean | UserDefaultArgs<ExtArgs>
+    guest?: boolean | Cabin$guestArgs<ExtArgs>
   }, ExtArgs["result"]["cabin"]>
 
   export type CabinSelectScalar = {
@@ -2404,19 +2367,19 @@ export namespace Prisma {
 
   export type CabinOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "discount" | "name" | "maxCapacity" | "numGuard" | "image" | "userid" | "regularPrice" | "description", ExtArgs["result"]["cabin"]>
   export type CabinInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    guest?: boolean | UserDefaultArgs<ExtArgs>
+    guest?: boolean | Cabin$guestArgs<ExtArgs>
   }
   export type CabinIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    guest?: boolean | UserDefaultArgs<ExtArgs>
+    guest?: boolean | Cabin$guestArgs<ExtArgs>
   }
   export type CabinIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    guest?: boolean | UserDefaultArgs<ExtArgs>
+    guest?: boolean | Cabin$guestArgs<ExtArgs>
   }
 
   export type $CabinPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Cabin"
     objects: {
-      guest: Prisma.$UserPayload<ExtArgs>
+      guest: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2425,7 +2388,7 @@ export namespace Prisma {
       maxCapacity: number
       numGuard: number
       image: string
-      userid: string
+      userid: string | null
       regularPrice: number
       description: string
     }, ExtArgs["result"]["cabin"]>
@@ -2822,7 +2785,7 @@ export namespace Prisma {
    */
   export interface Prisma__CabinClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    guest<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    guest<T extends Cabin$guestArgs<ExtArgs> = {}>(args?: Subset<T, Cabin$guestArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3262,6 +3225,25 @@ export namespace Prisma {
   }
 
   /**
+   * Cabin.guest
+   */
+  export type Cabin$guestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Cabin without action
    */
   export type CabinDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3337,6 +3319,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -3429,7 +3419,7 @@ export namespace Prisma {
     role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    cabin?: CabinListRelationFilter
+    cabin?: XOR<CabinNullableScalarRelationFilter, CabinWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -3441,7 +3431,7 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    cabin?: CabinOrderByRelationAggregateInput
+    cabin?: CabinOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -3456,7 +3446,7 @@ export namespace Prisma {
     role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    cabin?: CabinListRelationFilter
+    cabin?: XOR<CabinNullableScalarRelationFilter, CabinWhereInput> | null
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -3497,10 +3487,10 @@ export namespace Prisma {
     maxCapacity?: IntFilter<"Cabin"> | number
     numGuard?: IntFilter<"Cabin"> | number
     image?: StringFilter<"Cabin"> | string
-    userid?: StringFilter<"Cabin"> | string
+    userid?: StringNullableFilter<"Cabin"> | string | null
     regularPrice?: IntFilter<"Cabin"> | number
     description?: StringFilter<"Cabin"> | string
-    guest?: XOR<UserScalarRelationFilter, UserWhereInput>
+    guest?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type CabinOrderByWithRelationInput = {
@@ -3510,7 +3500,7 @@ export namespace Prisma {
     maxCapacity?: SortOrder
     numGuard?: SortOrder
     image?: SortOrder
-    userid?: SortOrder
+    userid?: SortOrderInput | SortOrder
     regularPrice?: SortOrder
     description?: SortOrder
     guest?: UserOrderByWithRelationInput
@@ -3518,6 +3508,7 @@ export namespace Prisma {
 
   export type CabinWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    userid?: string
     AND?: CabinWhereInput | CabinWhereInput[]
     OR?: CabinWhereInput[]
     NOT?: CabinWhereInput | CabinWhereInput[]
@@ -3526,11 +3517,10 @@ export namespace Prisma {
     maxCapacity?: IntFilter<"Cabin"> | number
     numGuard?: IntFilter<"Cabin"> | number
     image?: StringFilter<"Cabin"> | string
-    userid?: StringFilter<"Cabin"> | string
     regularPrice?: IntFilter<"Cabin"> | number
     description?: StringFilter<"Cabin"> | string
-    guest?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+    guest?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id" | "userid">
 
   export type CabinOrderByWithAggregationInput = {
     id?: SortOrder
@@ -3539,7 +3529,7 @@ export namespace Prisma {
     maxCapacity?: SortOrder
     numGuard?: SortOrder
     image?: SortOrder
-    userid?: SortOrder
+    userid?: SortOrderInput | SortOrder
     regularPrice?: SortOrder
     description?: SortOrder
     _count?: CabinCountOrderByAggregateInput
@@ -3559,7 +3549,7 @@ export namespace Prisma {
     maxCapacity?: IntWithAggregatesFilter<"Cabin"> | number
     numGuard?: IntWithAggregatesFilter<"Cabin"> | number
     image?: StringWithAggregatesFilter<"Cabin"> | string
-    userid?: StringWithAggregatesFilter<"Cabin"> | string
+    userid?: StringNullableWithAggregatesFilter<"Cabin"> | string | null
     regularPrice?: IntWithAggregatesFilter<"Cabin"> | number
     description?: StringWithAggregatesFilter<"Cabin"> | string
   }
@@ -3573,7 +3563,7 @@ export namespace Prisma {
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    cabin?: CabinCreateNestedManyWithoutGuestInput
+    cabin?: CabinCreateNestedOneWithoutGuestInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -3585,7 +3575,7 @@ export namespace Prisma {
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    cabin?: CabinUncheckedCreateNestedManyWithoutGuestInput
+    cabin?: CabinUncheckedCreateNestedOneWithoutGuestInput
   }
 
   export type UserUpdateInput = {
@@ -3597,7 +3587,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    cabin?: CabinUpdateManyWithoutGuestNestedInput
+    cabin?: CabinUpdateOneWithoutGuestNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -3609,7 +3599,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    cabin?: CabinUncheckedUpdateManyWithoutGuestNestedInput
+    cabin?: CabinUncheckedUpdateOneWithoutGuestNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -3654,7 +3644,7 @@ export namespace Prisma {
     image: string
     regularPrice: number
     description: string
-    guest: UserCreateNestedOneWithoutCabinInput
+    guest?: UserCreateNestedOneWithoutCabinInput
   }
 
   export type CabinUncheckedCreateInput = {
@@ -3664,7 +3654,7 @@ export namespace Prisma {
     maxCapacity: number
     numGuard: number
     image: string
-    userid: string
+    userid?: string | null
     regularPrice: number
     description: string
   }
@@ -3678,7 +3668,7 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     regularPrice?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
-    guest?: UserUpdateOneRequiredWithoutCabinNestedInput
+    guest?: UserUpdateOneWithoutCabinNestedInput
   }
 
   export type CabinUncheckedUpdateInput = {
@@ -3688,7 +3678,7 @@ export namespace Prisma {
     maxCapacity?: IntFieldUpdateOperationsInput | number
     numGuard?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
-    userid?: StringFieldUpdateOperationsInput | string
+    userid?: NullableStringFieldUpdateOperationsInput | string | null
     regularPrice?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
   }
@@ -3700,7 +3690,7 @@ export namespace Prisma {
     maxCapacity: number
     numGuard: number
     image: string
-    userid: string
+    userid?: string | null
     regularPrice: number
     description: string
   }
@@ -3723,7 +3713,7 @@ export namespace Prisma {
     maxCapacity?: IntFieldUpdateOperationsInput | number
     numGuard?: IntFieldUpdateOperationsInput | number
     image?: StringFieldUpdateOperationsInput | string
-    userid?: StringFieldUpdateOperationsInput | string
+    userid?: NullableStringFieldUpdateOperationsInput | string | null
     regularPrice?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
   }
@@ -3761,14 +3751,9 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type CabinListRelationFilter = {
-    every?: CabinWhereInput
-    some?: CabinWhereInput
-    none?: CabinWhereInput
-  }
-
-  export type CabinOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type CabinNullableScalarRelationFilter = {
+    is?: CabinWhereInput | null
+    isNot?: CabinWhereInput | null
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -3857,9 +3842,29 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type CabinCountOrderByAggregateInput = {
@@ -3928,18 +3933,34 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type CabinCreateNestedManyWithoutGuestInput = {
-    create?: XOR<CabinCreateWithoutGuestInput, CabinUncheckedCreateWithoutGuestInput> | CabinCreateWithoutGuestInput[] | CabinUncheckedCreateWithoutGuestInput[]
-    connectOrCreate?: CabinCreateOrConnectWithoutGuestInput | CabinCreateOrConnectWithoutGuestInput[]
-    createMany?: CabinCreateManyGuestInputEnvelope
-    connect?: CabinWhereUniqueInput | CabinWhereUniqueInput[]
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type CabinUncheckedCreateNestedManyWithoutGuestInput = {
-    create?: XOR<CabinCreateWithoutGuestInput, CabinUncheckedCreateWithoutGuestInput> | CabinCreateWithoutGuestInput[] | CabinUncheckedCreateWithoutGuestInput[]
-    connectOrCreate?: CabinCreateOrConnectWithoutGuestInput | CabinCreateOrConnectWithoutGuestInput[]
-    createMany?: CabinCreateManyGuestInputEnvelope
-    connect?: CabinWhereUniqueInput | CabinWhereUniqueInput[]
+  export type CabinCreateNestedOneWithoutGuestInput = {
+    create?: XOR<CabinCreateWithoutGuestInput, CabinUncheckedCreateWithoutGuestInput>
+    connectOrCreate?: CabinCreateOrConnectWithoutGuestInput
+    connect?: CabinWhereUniqueInput
+  }
+
+  export type CabinUncheckedCreateNestedOneWithoutGuestInput = {
+    create?: XOR<CabinCreateWithoutGuestInput, CabinUncheckedCreateWithoutGuestInput>
+    connectOrCreate?: CabinCreateOrConnectWithoutGuestInput
+    connect?: CabinWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -3954,32 +3975,24 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type CabinUpdateManyWithoutGuestNestedInput = {
-    create?: XOR<CabinCreateWithoutGuestInput, CabinUncheckedCreateWithoutGuestInput> | CabinCreateWithoutGuestInput[] | CabinUncheckedCreateWithoutGuestInput[]
-    connectOrCreate?: CabinCreateOrConnectWithoutGuestInput | CabinCreateOrConnectWithoutGuestInput[]
-    upsert?: CabinUpsertWithWhereUniqueWithoutGuestInput | CabinUpsertWithWhereUniqueWithoutGuestInput[]
-    createMany?: CabinCreateManyGuestInputEnvelope
-    set?: CabinWhereUniqueInput | CabinWhereUniqueInput[]
-    disconnect?: CabinWhereUniqueInput | CabinWhereUniqueInput[]
-    delete?: CabinWhereUniqueInput | CabinWhereUniqueInput[]
-    connect?: CabinWhereUniqueInput | CabinWhereUniqueInput[]
-    update?: CabinUpdateWithWhereUniqueWithoutGuestInput | CabinUpdateWithWhereUniqueWithoutGuestInput[]
-    updateMany?: CabinUpdateManyWithWhereWithoutGuestInput | CabinUpdateManyWithWhereWithoutGuestInput[]
-    deleteMany?: CabinScalarWhereInput | CabinScalarWhereInput[]
+  export type CabinUpdateOneWithoutGuestNestedInput = {
+    create?: XOR<CabinCreateWithoutGuestInput, CabinUncheckedCreateWithoutGuestInput>
+    connectOrCreate?: CabinCreateOrConnectWithoutGuestInput
+    upsert?: CabinUpsertWithoutGuestInput
+    disconnect?: CabinWhereInput | boolean
+    delete?: CabinWhereInput | boolean
+    connect?: CabinWhereUniqueInput
+    update?: XOR<XOR<CabinUpdateToOneWithWhereWithoutGuestInput, CabinUpdateWithoutGuestInput>, CabinUncheckedUpdateWithoutGuestInput>
   }
 
-  export type CabinUncheckedUpdateManyWithoutGuestNestedInput = {
-    create?: XOR<CabinCreateWithoutGuestInput, CabinUncheckedCreateWithoutGuestInput> | CabinCreateWithoutGuestInput[] | CabinUncheckedCreateWithoutGuestInput[]
-    connectOrCreate?: CabinCreateOrConnectWithoutGuestInput | CabinCreateOrConnectWithoutGuestInput[]
-    upsert?: CabinUpsertWithWhereUniqueWithoutGuestInput | CabinUpsertWithWhereUniqueWithoutGuestInput[]
-    createMany?: CabinCreateManyGuestInputEnvelope
-    set?: CabinWhereUniqueInput | CabinWhereUniqueInput[]
-    disconnect?: CabinWhereUniqueInput | CabinWhereUniqueInput[]
-    delete?: CabinWhereUniqueInput | CabinWhereUniqueInput[]
-    connect?: CabinWhereUniqueInput | CabinWhereUniqueInput[]
-    update?: CabinUpdateWithWhereUniqueWithoutGuestInput | CabinUpdateWithWhereUniqueWithoutGuestInput[]
-    updateMany?: CabinUpdateManyWithWhereWithoutGuestInput | CabinUpdateManyWithWhereWithoutGuestInput[]
-    deleteMany?: CabinScalarWhereInput | CabinScalarWhereInput[]
+  export type CabinUncheckedUpdateOneWithoutGuestNestedInput = {
+    create?: XOR<CabinCreateWithoutGuestInput, CabinUncheckedCreateWithoutGuestInput>
+    connectOrCreate?: CabinCreateOrConnectWithoutGuestInput
+    upsert?: CabinUpsertWithoutGuestInput
+    disconnect?: CabinWhereInput | boolean
+    delete?: CabinWhereInput | boolean
+    connect?: CabinWhereUniqueInput
+    update?: XOR<XOR<CabinUpdateToOneWithWhereWithoutGuestInput, CabinUpdateWithoutGuestInput>, CabinUncheckedUpdateWithoutGuestInput>
   }
 
   export type UserCreateNestedOneWithoutCabinInput = {
@@ -3996,12 +4009,18 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type UserUpdateOneRequiredWithoutCabinNestedInput = {
+  export type UserUpdateOneWithoutCabinNestedInput = {
     create?: XOR<UserCreateWithoutCabinInput, UserUncheckedCreateWithoutCabinInput>
     connectOrCreate?: UserCreateOrConnectWithoutCabinInput
     upsert?: UserUpsertWithoutCabinInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCabinInput, UserUpdateWithoutCabinInput>, UserUncheckedUpdateWithoutCabinInput>
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -4088,6 +4107,20 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -4113,6 +4146,34 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type CabinCreateWithoutGuestInput = {
@@ -4142,40 +4203,37 @@ export namespace Prisma {
     create: XOR<CabinCreateWithoutGuestInput, CabinUncheckedCreateWithoutGuestInput>
   }
 
-  export type CabinCreateManyGuestInputEnvelope = {
-    data: CabinCreateManyGuestInput | CabinCreateManyGuestInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type CabinUpsertWithWhereUniqueWithoutGuestInput = {
-    where: CabinWhereUniqueInput
+  export type CabinUpsertWithoutGuestInput = {
     update: XOR<CabinUpdateWithoutGuestInput, CabinUncheckedUpdateWithoutGuestInput>
     create: XOR<CabinCreateWithoutGuestInput, CabinUncheckedCreateWithoutGuestInput>
+    where?: CabinWhereInput
   }
 
-  export type CabinUpdateWithWhereUniqueWithoutGuestInput = {
-    where: CabinWhereUniqueInput
+  export type CabinUpdateToOneWithWhereWithoutGuestInput = {
+    where?: CabinWhereInput
     data: XOR<CabinUpdateWithoutGuestInput, CabinUncheckedUpdateWithoutGuestInput>
   }
 
-  export type CabinUpdateManyWithWhereWithoutGuestInput = {
-    where: CabinScalarWhereInput
-    data: XOR<CabinUpdateManyMutationInput, CabinUncheckedUpdateManyWithoutGuestInput>
+  export type CabinUpdateWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    discount?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    maxCapacity?: IntFieldUpdateOperationsInput | number
+    numGuard?: IntFieldUpdateOperationsInput | number
+    image?: StringFieldUpdateOperationsInput | string
+    regularPrice?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
   }
 
-  export type CabinScalarWhereInput = {
-    AND?: CabinScalarWhereInput | CabinScalarWhereInput[]
-    OR?: CabinScalarWhereInput[]
-    NOT?: CabinScalarWhereInput | CabinScalarWhereInput[]
-    id?: StringFilter<"Cabin"> | string
-    discount?: IntFilter<"Cabin"> | number
-    name?: StringFilter<"Cabin"> | string
-    maxCapacity?: IntFilter<"Cabin"> | number
-    numGuard?: IntFilter<"Cabin"> | number
-    image?: StringFilter<"Cabin"> | string
-    userid?: StringFilter<"Cabin"> | string
-    regularPrice?: IntFilter<"Cabin"> | number
-    description?: StringFilter<"Cabin"> | string
+  export type CabinUncheckedUpdateWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    discount?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    maxCapacity?: IntFieldUpdateOperationsInput | number
+    numGuard?: IntFieldUpdateOperationsInput | number
+    image?: StringFieldUpdateOperationsInput | string
+    regularPrice?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateWithoutCabinInput = {
@@ -4236,50 +4294,6 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CabinCreateManyGuestInput = {
-    id?: string
-    discount: number
-    name: string
-    maxCapacity: number
-    numGuard: number
-    image: string
-    regularPrice: number
-    description: string
-  }
-
-  export type CabinUpdateWithoutGuestInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    discount?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    maxCapacity?: IntFieldUpdateOperationsInput | number
-    numGuard?: IntFieldUpdateOperationsInput | number
-    image?: StringFieldUpdateOperationsInput | string
-    regularPrice?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type CabinUncheckedUpdateWithoutGuestInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    discount?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    maxCapacity?: IntFieldUpdateOperationsInput | number
-    numGuard?: IntFieldUpdateOperationsInput | number
-    image?: StringFieldUpdateOperationsInput | string
-    regularPrice?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type CabinUncheckedUpdateManyWithoutGuestInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    discount?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    maxCapacity?: IntFieldUpdateOperationsInput | number
-    numGuard?: IntFieldUpdateOperationsInput | number
-    image?: StringFieldUpdateOperationsInput | string
-    regularPrice?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
   }
 
 

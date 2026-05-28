@@ -29,7 +29,7 @@ export async function uploadImage(image: File): Promise<string> {
   const base64Data = Buffer.from(imageData).toString("base64");
   const fileUri = "data:" + mime + ";" + encoding + "," + base64Data;
   const result = (await cloudinary.uploader.upload(fileUri, {
-    folder: "clothes",
+    folder: "cabins",
   })) as CloudinaryUploadResult;
   return result.secure_url;
 }

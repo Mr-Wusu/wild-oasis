@@ -2,7 +2,6 @@ import { UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { Cabin } from "@/generated/prisma";
 
-
 type CabinCardProps = {
   cabin: Cabin;
 };
@@ -11,47 +10,82 @@ function CabinCard({ cabin }: CabinCardProps) {
   const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
 
   return (
-    <div className="flex border-primary-800 border">
-      <Image
-        src={image}
-        alt={`Cabin ${name}`}
-        className="flex-1 border-r border-primary-800"
-      />
+    // Layout:
+    // < 640px  → flex-col  (image top, text bottom) — single column grid
+    // 640px+   → flex-row  (image left, text right) — single column grid
+    // 1024px+  → flex-row  (image left, text right) — 2-column grid, fixed 464×269
+    // 1200px+  → flex-col  (image top, text bottom) — 3-column grid, auto size
+    <div
+      className="
+      flex flex-col max-w-100
+      sm:flex-row sm:max-w-115 mx-auto sm:h-55
+      lg:w-116 lg:h-63
+      min-[1200px]:flex-col min-[1200px]:w-full min-[1200px]:h-auto
+      border border-primary-800 bg-primary-950 overflow-hidden rounded-sm
+      group transition-all duration-300 hover:border-primary-700
+    "
+    >
+      {/* Image */}
+      {/* < 640px  → full width, fixed height 180px */}
+      {/* 640px+   → fixed width 180px, auto height (fills flex-row) */}
+      {/* 1024px+  → fixed width 160px, full 269px height */}
+      {/* 1200px+  → full width, fixed height 160px */}
+      <div
+        className="
+        relative h-50 w-full shrink-0 overflow-hidden
+        sm:h-auto sm:w-53
+        lg:w-48 lg:h-full
+        min-[1200px]:w-full min-[1200px]:h-40
+      "
+      >
+        <Image
+          src={image}
+          alt={`Cabin ${name}`}
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1200px) 180px, 33vw"
+        />
+      </div>
 
-      <div className="grow">
-        <div className="pt-5 pb-4 px-7 bg-primary-950">
-          <h3 className="text-accent-500 font-semibold text-2xl mb-3">
-            Cabin {name}
+      {/* Text content */}
+      <div className="flex flex-col grow justify-between overflow-hidden pt-2">
+        <div className="pt-4 pb-3 px-5 flex flex-col grow justify-center">
+          <h3 className="text-accent-500 font-semibold text-lg md:text-xl lg:text-2xl mb-1 tracking-wide ">
+            {name}
           </h3>
 
-          <div className="flex gap-3 items-center mb-2">
-            <UsersIcon className="h-5 w-5 text-primary-600" />
-            <p className="text-lg text-primary-200">
-              For up to <span className="font-bold">{maxCapacity}</span> guests
+          <div className="flex gap-2 items-center mb-3">
+            <UsersIcon className="h-4 w-4 text-primary-600 shrink-0" />
+            <p className="text-base text-primary-200">
+              For up to{" "}
+              <span className="font-bold text-primary-10">{maxCapacity}</span>{" "}
+              guests
             </p>
           </div>
 
-          <p className="flex gap-3 justify-end items-baseline">
+          <div className="flex gap-2 items-baseline mb-3 mt-auto lg:ml-5">
             {discount > 0 ? (
               <>
-                <span className="text-3xl font-[350]">
+                <span className="text-xl font-light text-primary-10 ">
                   ${regularPrice - discount}
                 </span>
-                <span className="line-through font-semibold text-primary-600">
+                <span className="line-through font-medium text-sm text-primary-600">
                   ${regularPrice}
                 </span>
               </>
             ) : (
-              <span className="text-3xl font-[350]">${regularPrice}</span>
+              <span className="text-2xl font-light text-primary-10 ">
+                ${regularPrice}
+              </span>
             )}
-            <span className="text-primary-200">/ night</span>
-          </p>
+            <span className="text-sm text-primary-300">/ night</span>
+          </div>
         </div>
 
-        <div className="bg-primary-950 border-t border-t-primary-800 text-right">
+        <div className="border-t border-primary-800 text-right">
           <a
             href={`/cabins/${id}`}
-            className="border-l border-primary-800 py-4 px-6 inline-block hover:bg-accent-600 transition-all hover:text-primary-900"
+            className="w-full py-3 px-5 inline-block text-center text-xs font-semibold tracking-wider uppercase text-primary-200 hover:bg-accent-600 hover:text-primary-950 transition-all duration-300"
           >
             Details & reservation &rarr;
           </a>
