@@ -3508,19 +3508,19 @@ export namespace Prisma {
 
   export type CabinWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    name?: string
     userid?: string
     AND?: CabinWhereInput | CabinWhereInput[]
     OR?: CabinWhereInput[]
     NOT?: CabinWhereInput | CabinWhereInput[]
     discount?: IntFilter<"Cabin"> | number
-    name?: StringFilter<"Cabin"> | string
     maxCapacity?: IntFilter<"Cabin"> | number
     numGuard?: IntFilter<"Cabin"> | number
     image?: StringFilter<"Cabin"> | string
     regularPrice?: IntFilter<"Cabin"> | number
     description?: StringFilter<"Cabin"> | string
     guest?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id" | "userid">
+  }, "id" | "name" | "userid">
 
   export type CabinOrderByWithAggregationInput = {
     id?: SortOrder

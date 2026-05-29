@@ -1,69 +1,137 @@
-import { getCabinById } from "@/lib/authService";
-import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
 import { notFound } from "next/navigation";
+import Image from "next/image";
+import { getCabinById } from "@/lib/authService";
+import { getBlurDataURL } from "@/lib/cloudinary";
+import { UsersIcon, MapPinIcon } from "@heroicons/react/24/solid";
 
-// PLACEHOLDER DATA
-
-type PageProps = {
-  params: {
-    cabinId: string;
-  };
+type Props = {
+  params: { cabinId: string };
 };
 
-export default async function Page({ params }: PageProps) {
+export default async function CabinPage({ params }: Props) {
   const { cabinId } = await params;
   const cabin = await getCabinById(cabinId);
+
   if (!cabin) {
-    notFound(); // import { notFound } from "next/navigation"
+    notFound();
   }
 
-  const {  name, maxCapacity, image, description } =
+  const { name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
 
   return (
-    <div className="max-w-6xl mx-auto pt-28 text-primary-10 ">
-      <div className="grid grid-cols-[3fr_4fr] gap-20 border border-primary-800 py-3 px-10 mb-24">
-        <div className="relative scale-[1.15] -translate-x-3">
-          <Image src={image} alt={`Cabin ${name}`} fill/>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:py-16 lg:py-20 font-josefineSans text-primary-10 flex flex-col lg:flex-row ">
+      <div
+        className="
+        flex flex-col max-w-md w-[85vw] mx-auto gap-4.5 overflow-hidden rounded-sm border          md:max-w-3xl md:w-[90vw] h-145 border-primary-800 
+        lg:max-w-4xl bg-primary-950
+        md:flex-row md:gap-10 md:items-start
+        lg:gap-12
+        min-:gap-16
+      "
+      >
+        {/* Image - top on mobile, left on md+ */}
+        <div
+          className="
+          relative h-64 w-full shrink-0 overflow-hidden
+          
+          md:h-full md:w-1/2 md:max-w-lg
+          lg:h-full
+          
+        "
+        >
+          <Image
+            src={image}
+            alt={`Cabin ${name}`}
+            className="object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+            placeholder="blur"
+            blurDataURL={getBlurDataURL(image)}
+          />
         </div>
 
-        <div>
-          <h3 className="text-accent-100 font-black text-5xl mb-5 bg-primary-950 p-6 pb-1 w-[150%]">
+        {/* Content - below on mobile, right on md+ */}
+        <div className="flex flex-col grow px-5 pb-8 md:px-0 md:pr-8 md:py-8 lg:pr-12 lg:py-10">
+          {/* Cabin name - drops size at md */}
+          <h1
+            className="text-3xl font-semibold text-accent-500 tracking-wide mb-3
+                         sm:text-4xl
+                         md:text-2xl md:mb-2
+                         lg:text-3xl lg:mb-3
+                         min-:text-4xl"
+          >
             {name}
-          </h3>
+          </h1>
 
-          <p className="text-lg text-primary-300 mb-10 font-josefineSans">{description}</p>
+          {/* Meta info */}
+          <div className="flex gap-10">
+            <div className="flex flex-col mb-6 md:mb-5 md:gap-2.5">
+              <div className="flex gap-2 items-center">
+                <UsersIcon className="h-5 w-5 text-primary-600 shrink-0 md:h-4 md:w-4" />
+                <p className="text-lg text-primary-200 md:text-base">
+                  For up to{" "}
+                  <span className="font-bold text-primary-10">
+                    {maxCapacity}
+                  </span>{" "}
+                  guests
+                </p>
+              </div>
 
-          <ul className="flex flex-col gap-4 mb-7">
-            <li className="flex gap-3 items-center">
-              <UsersIcon className="h-5 w-5 text-primary-600" />
-              <span className="text-lg font-josefineSans">
-                For up to <span className="font-bold">{maxCapacity}</span>{" "}
-                guests
-              </span>
-            </li>
-            <li className="flex gap-3 items-center">
-              <MapPinIcon className="h-5 w-5 text-primary-600" />
-              <span className="text-lg font-josefineSans">
-                Located in the heart of the{" "}
-                <span className="font-bold">Dolomites</span> (Italy)
-              </span>
-            </li>
-            <li className="flex gap-3 items-center">
-              <EyeSlashIcon className="h-5 w-5 text-primary-600" />
-              <span className="text-lg font-josefineSans">
-                Privacy <span className="font-bold">100%</span> guaranteed
-              </span>
-            </li>
-          </ul>
+              <div className="flex gap-2 items-center">
+                <MapPinIcon className="h-5 w-5 text-primary-600 shrink-0 md:h-4 md:w-4" />
+                <p className="text-lg text-primary-200 md:text-base">
+                  Italian Dolomites
+                </p>
+              </div>
+            </div>
+
+            {/* Price - also scales down at md */}
+            <div className="flex gap-2 items-end mb-8 md:mb-6">
+              {discount > 0 ? (
+                <>
+                  <span className="text-3xl font-bold text-accent-400 md:text-2xl lg:text-3xl">
+                    ${regularPrice - discount}
+                  </span>
+                  <div>
+                    <span className="text-xl line-through md:text-lg lg:text-xl">
+                      ${regularPrice}
+                    </span>
+                    <span className="text-primary-200 text-base md:text-sm">
+                      /night
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <span className="text-3xl font-bold text-accent-400 md:text-2xl lg:text-3xl">
+                    ${regularPrice}
+                  </span>
+                  <span className="text-primary-200 text-base md:text-sm">
+                    /night
+                  </span>
+                </>
+              )}
+            </div>
+          </div>
+          <div>
+            {/* Description */}
+            <div className="mb-8 md:mb-6">
+              <h2 className="text-xl font-semibold text-accent-400 mb-1 md:text-lg md:mb-2">
+                About this cabin
+              </h2>
+              <p className="text-base leading-relaxed text-primary-200 md:text-sm lg:text-base">
+                {description}
+              </p>
+            </div>
+
+            {/* CTA */}
+            <button className="w-full rounded-sm bg-primary-8 py-2.5 hover:bg-primary-7   text-lg font-medium text-primary-1 transition ease-in cursor-pointer md:py-3 md:text-base lg:py-4 lg:text-lg">
+              Reserve now
+            </button>
+          </div>
         </div>
-      </div>
-
-      <div className="-mt-11">
-        <h2 className="text-5xl font-semibold text-center font-josefineSans">
-          Reserve today. Pay on arrival.
-        </h2>
       </div>
     </div>
   );

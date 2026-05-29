@@ -27,7 +27,7 @@ model User {
 model Cabin {
   id           String  @id @default(cuid())
   discount     Int
-  name         String
+  name         String  @unique
   maxCapacity  Int
   numGuard     Int
   image        String
