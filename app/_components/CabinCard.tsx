@@ -2,6 +2,7 @@ import { UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { Cabin } from "@/generated/prisma";
 import { getBlurDataURL } from "@/lib/cloudinary";
+import Link from "next/link";
 
 type CabinCardProps = {
   cabin: Cabin;
@@ -76,12 +77,12 @@ function CabinCard({ cabin }: CabinCardProps) {
         </div>
 
         <div className="border-t border-primary-800 text-right">
-          <a
+          <Link
             href={`/cabins/${id}`}
-            className="w-full py-3 px-5 inline-block text-center text-xs font-semibold tracking-wider uppercase text-primary-200 hover:bg-accent-600 hover:text-primary-950 transition-all duration-300"
+            className="w-full py-3 px-5 inline-block text-center text-xs font-semibold tracking-wider uppercase text-primary-200 hover:bg-primary-7 hover:text-primary-1 transition-all duration-300"
           >
             Details & reservation &rarr;
-          </a>
+          </Link>
         </div>
       </div>
     </div>

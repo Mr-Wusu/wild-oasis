@@ -1,6 +1,11 @@
 /////////////
 // GET
 
+interface Country {
+  name: string;
+  flag: string;
+}
+
 export async function getCabin(id: string) {
   console.log(id);
 }
@@ -32,14 +37,28 @@ export async function getBookedDatesByCabinId(cabinId: string) {
 export async function getCountries() {
   try {
     const res = await fetch(
-      "https://restcountries.com/v2/all?fields=name,flag",
+      "https://countriesnow.space/api/v0.1/countries/flag/images",
     );
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
     const countries = await res.json();
-    return countries;
-  } catch {
+
+    console.log(countries);
+    
+
+    return countries.data.map((c: Country) => ({
+      name: c.name,
+      flag: c.flag
+    }));
+  } catch (error) {
+    console.error("getCountries error:", error); // <-- shows real cause in terminal
     throw new Error("Could not fetch countries");
   }
 }
+
 // CREATE
 export async function createGuest(newGuest: string) {
   console.log(newGuest);

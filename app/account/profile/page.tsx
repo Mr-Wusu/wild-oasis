@@ -1,6 +1,8 @@
 import { SelectCountry } from "@/app/_components/Reservations/SelectCountry";
 import { Metadata } from "next";
 import Image from "next/image";
+import { Suspense } from "react";
+
 
 export const metadata: Metadata = {
   title: "Update profile / The Wild Oasis",
@@ -58,12 +60,20 @@ function Profile() {
             />
           </div>
 
-          <SelectCountry
-            name="nationality"
-            id="nationality"
-            className="px-4 py-3 bg-white text-primary-10 w-full shadow-sm rounded-sm focus:ring-2 focus:ring-primary-9 focus:outline-none"
-            defaultCountry={nationality}
-          />
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center text-primary-10 font-josefineSans">
+                Loading countries
+              </div>
+            }
+          >
+            <SelectCountry
+              name="nationality"
+              id="nationality"
+              className="px-4 py-3 bg-white text-primary-10 w-full shadow-sm rounded-sm focus:ring-2 focus:ring-primary-9 focus:outline-none"
+              defaultCountry={nationality}
+            />
+          </Suspense>
         </div>
 
         <div className="space-y-2">

@@ -1,10 +1,8 @@
-import CabinCard from "@/app/_components/CabinCard";
-import { Cabin } from "@/generated/prisma";
-import { getCabins } from "@/lib/authService";
+import { Suspense } from "react";
+import CabinList from "../_components/CabinList";
+import { ClipLoader } from "react-spinners";
 
 export default async function Cabins() {
-  const cabins: Cabin[] = await getCabins();
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 md:py-24 text-primary-10 font-josefineSans animate-fadeIn">
       {/* Header */}
@@ -21,36 +19,20 @@ export default async function Cabins() {
           vacation. Welcome to paradise.
         </p>
       </header>
-
-      {/* Grid
-          < 1024px  → 1 column,  cards full width, stacked
-          1024px+   → 2 columns, cards fixed 464×269, grid shrinks to fit and centers
-          1200px+   → 3 columns, cards fill their cells, vertical layout
-      */}
-      {cabins.length > 0 ? (
-        <div
-          className="
-          grid grid-cols-1 gap-6
-          lg:grid-cols-2 lg:gap-8 lg:w-fit lg:mx-auto
-          min-[1200px]:grid-cols-3 min-[1200px]:w-full min-[1200px]:mx-0
-        "
-        >
-          {cabins.map((cabin) => (
-            <div
-              key={cabin.id}
-              className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
-            >
-              <CabinCard cabin={cabin} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-12 bg-primary-900/10 rounded-lg border border-dashed border-primary-200/20">
-          <p className="text-primary-200 text-lg">
-            No cabins found at the moment. Please check back later!
-          </p>
-        </div>
-      )}
+      <Suspense
+        fallback={
+          <div className="flex flex-col h-full items-center justify-center text-primary-10">
+            <ClipLoader
+              color="#D92D2C"
+              size={40}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        }
+      >
+        <CabinList />
+      </Suspense>
     </div>
   );
 }

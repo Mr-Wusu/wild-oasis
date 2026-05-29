@@ -96,7 +96,19 @@ export async function createCabin(data: {
 }
 
   export async function getCabins() {
-    return prisma.cabin.findMany()
+    return prisma.cabin.findMany({
+      orderBy: {
+        regularPrice: "desc"
+      }
+    })
+  }
+
+  export async function getCabinById(id: string) {
+    return prisma.cabin.findUnique({
+      where: {
+        id
+      }
+    })
   }
 
   export async function getAvailableCabins() {}
