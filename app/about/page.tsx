@@ -51,7 +51,7 @@ export default function About() {
       </div>
 
       {/* Text Block 2 */}
-      <div className="md:col-span-3 md:col-start-4 lg:col-span-3 lg:col-start-4 order-1 md:order-none">
+      <div className="md:col-span-3 md:col-start-4 lg:col-span-3 lg:col-start-4 order-1 md:order-0">
         <h1 className="text-3xl mb-6 text-accent-400 font-medium sm:text-4xl sm:mb-10">
           Managed by our family since 1962
         </h1>
