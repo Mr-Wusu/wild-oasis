@@ -1,25 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import about1 from "@/public/about-1.jpg"
-import about2 from "@/public/about-2.jpg"
+import about1 from "@/public/about-1.jpg";
+import about2 from "@/public/about-2.jpg";
+
 export default function About() {
   return (
     <div
-      className="grid grid-cols-1 gap-y-16 text-base items-center px-6 py-16 font-josefineSans text-primary-10
-                    sm:px-10 sm:py-20 sm:text-lg
-                    md:grid-cols-6 md:gap-x-10 md:gap-y-24 md:px-12
-                    lg:gap-x-15 lg:gap-y-32 lg:px-16 lg:py-28
-                    min-:px-16"
+      className="grid grid-cols-1 gap-y-16 text-base items-center px-6 pt-26 font-josefineSans text-primary-10
+                    sm:px-10 sm:py-24 sm:text-lg
+                    md:grid-cols-6 md:gap-x-10 md:gap-y-14 md:px-12
+                    lg:gap-x-15 lg:gap-y-20 lg:px-16 lg:py-28"
     >
       {/* Text Block 1 */}
       <div className="md:col-span-3 lg:col-span-3">
-        <h1
-          className="text-3xl mb-6 text-accent-400 font-medium
-                       sm:text-4xl sm:mb-10"
-        >
+        <h1 className="text-3xl mb-6 text-accent-400 font-medium sm:text-4xl sm:mb-10">
           Welcome to The Wild Oasis
         </h1>
-
         <div className="space-y-5 sm:space-y-7">
           <p>
             Where nature&lsquo;s beauty and comfortable living blend seamlessly.
@@ -42,51 +38,23 @@ export default function About() {
         </div>
       </div>
 
-
-      <div
-        className="relative h-64 w-full
-                      sm:h-80
-                      md:col-span-3 md:h-96
-                      lg:col-span-3 lg:h-99 lg:w-full
-                      min-:w-"
-      >
+      {/* Image Block 1 */}
+      <div className="relative h-64 w-full sm:h-80 md:col-span-3 md:h-96 lg:col-span-3 lg:h-99">
         <div className="absolute top-0 left-0 w-full h-full bg-linear-to-r from-primary-3/10 to-primary-5/10 z-40 pointer-events-none" />
         <Image
           src={about1}
-          alt="Family sitting around a fire pit in front of cabin"
+          alt="Family sitting around a fire pit"
           fill
-          className="object-cover"
-          placeholder="blur"
-        />
-      </div>
-
-  
-      <div
-        className="relative h-64 w-full
-                      sm:h-80
-                      md:col-span-3 md:h-96
-                      lg:col-span-3 lg:h-105 lg:w-full
-                      min-:w-"
-      >
-        <div className="absolute top-0 left-0 w-full h-full bg-linear-to-r from-primary-3/10 to-primary-5/10 z-40 pointer-events-none" />
-        <Image
-          fill
-          src={about2}
-          alt="Family that manages The Wild Oasis"
           className="object-cover"
           placeholder="blur"
         />
       </div>
 
       {/* Text Block 2 */}
-      <div className="md:col-span-3 md:col-start-4 lg:col-span-3 lg:col-start-4">
-        <h1
-          className="text-3xl mb-6 text-accent-400 font-medium
-                       sm:text-4xl sm:mb-10"
-        >
+      <div className="md:col-span-3 md:col-start-4 lg:col-span-3 lg:col-start-4 order-1 md:order-0">
+        <h1 className="text-3xl mb-6 text-accent-400 font-medium sm:text-4xl sm:mb-10">
           Managed by our family since 1962
         </h1>
-
         <div className="space-y-6 sm:space-y-8">
           <p>
             Since 1962, The Wild Oasis has been a cherished family-run retreat.
@@ -102,17 +70,29 @@ export default function About() {
             us at The Wild Oasis soon, where tradition meets tranquility, and
             every visit is like coming home.
           </p>
-
-          <div>
-            <Link
-              href="/cabins"
-              className="inline-block mt-2 bg-accent-500 px-6 py-3 text-primary-10 hover:text-primary-8 text-base font-semibold hover:bg-accent-600 transition-all
-                         sm:mt-4 sm:px-8 sm:text-lg"
-            >
-              Explore our luxury cabins
-            </Link>
-          </div>
         </div>
+      </div>
+
+      {/* Image Block 2 */}
+      <div className="relative h-64 w-full sm:h-80 md:col-span-3 md:h-96 lg:col-span-3 lg:h-105 order-2 md:order-0 md:row-start-2">
+        <div className="absolute top-0 left-0 w-full h-full bg-linear-to-r from-primary-3/10 to-primary-5/10 z-40 pointer-events-none" />
+        <Image
+          fill
+          src={about2}
+          alt="Family that manages The Wild Oasis"
+          className="object-cover"
+          placeholder="blur"
+        />
+      </div>
+
+      {/* Centered / Aligned Link Element */}
+      <div className="col-span-1 md:col-span-6 flex justify-center items-start h-full">
+        <Link
+          href="/cabins"
+          className="inline-block mt-2 bg-accent-500 px-6 py-3 text-primary-10 hover:text-primary-8 text-base font-semibold hover:bg-accent-600 transition-all sm:mt-4 sm:px-8 sm:text-lg"
+        >
+          Explore our luxury cabins
+        </Link>
       </div>
     </div>
   );
