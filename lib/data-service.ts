@@ -18,7 +18,6 @@ export const getCabins = async function () {};
 
 export async function getGuest(email: string) {
   console.log(email);
-  
 }
 export async function getBooking(id: string) {
   console.log(id);
@@ -26,12 +25,10 @@ export async function getBooking(id: string) {
 
 export async function getBookings(guestId: string) {
   console.log(guestId);
-  
 }
 
 export async function getBookedDatesByCabinId(cabinId: string) {
   console.log(cabinId);
-  
 }
 
 export async function getCountries() {
@@ -46,12 +43,9 @@ export async function getCountries() {
 
     const countries = await res.json();
 
-    console.log(countries);
-    
-
     return countries.data.map((c: Country) => ({
       name: c.name,
-      flag: c.flag
+      flag: c.flag,
     }));
   } catch (error) {
     console.error("getCountries error:", error); // <-- shows real cause in terminal
@@ -62,12 +56,10 @@ export async function getCountries() {
 // CREATE
 export async function createGuest(newGuest: string) {
   console.log(newGuest);
-  
 }
 
 export async function createBooking(newBooking: string) {
   console.log(newBooking);
-  
 }
 
 // UPDATE
@@ -78,5 +70,4 @@ export async function updateBooking(id: string, updatedFields: string) {
 // DELETE
 export async function deleteBooking(id: string) {
   console.log(id);
-  
 }

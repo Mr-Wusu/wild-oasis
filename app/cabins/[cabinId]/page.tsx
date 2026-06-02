@@ -1,12 +1,24 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { getCabinById } from "@/lib/authService";
-import { getBlurDataURL } from "@/lib/cloudinary";
 import { UsersIcon, MapPinIcon } from "@heroicons/react/24/solid";
+import BackArrow from "@/app/_components/BackArrow";
+import { Suspense } from "react";
+import LazyImage from "@/app/_components/LazyImage";
+import ImageSkeleton from "@/app/_components/ImageSkeleton";
+
+
 
 type Props = {
   params: { cabinId: string };
 };
+// To change this route to be a SSG route
+// export async function generateStaticParams() {
+//   const cabins = await getCabins();
+//   const ids = cabins.map((cabin) => ({
+//     cabinId: String(cabin.id)
+//   }));
+//   return ids
+// }
 
 export default async function CabinPage({ params }: Props) {
   const { cabinId } = await params;
@@ -19,17 +31,20 @@ export default async function CabinPage({ params }: Props) {
   const { name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
 
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:py-16 lg:py-20 font-josefineSans text-primary-10 flex flex-col lg:flex-row ">
+    <div className="max-w-7xl min-h-screen mx-auto px-4 sm:px-6 lg:px-8  md:py-16 lg:py-20 md:pt-20 font-josefineSans text-primary-10 flex flex-col lg:flex-row items-center justify-center ">
       <div
         className="
-        flex flex-col max-w-md w-[85vw] mx-auto gap-4.5 overflow-hidden rounded-sm border          md:max-w-3xl md:w-[90vw] h-145 border-primary-800 
-        lg:max-w-4xl bg-primary-950
+        flex flex-col shadow-md shadow-primary-3 max-w-md w-[85vw] mx-auto gap-4.5  rounded-sm border          md:max-w-3xl md:w-[90vw] h-145 border-primary-800 
         md:flex-row md:gap-10 md:items-start
+        lg:max-w-4xl bg-primary-950 md:h-100 lg:h-98     
         lg:gap-12
         min-:gap-16
+        bg-primary-1 relative
       "
       >
+        <BackArrow />
         {/* Image - top on mobile, left on md+ */}
         <div
           className="
@@ -40,16 +55,9 @@ export default async function CabinPage({ params }: Props) {
           
         "
         >
-          <Image
-            src={image}
-            alt={`Cabin ${name}`}
-            className="object-cover"
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority
-            placeholder="blur"
-            blurDataURL={getBlurDataURL(image)}
-          />
+          <Suspense fallback={<ImageSkeleton />}>
+            <LazyImage name={name} image={image} />
+          </Suspense>
         </div>
 
         {/* Content - below on mobile, right on md+ */}

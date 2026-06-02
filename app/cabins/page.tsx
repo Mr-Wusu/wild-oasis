@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import { ClipLoader } from "react-spinners";
 
+export const revalidate = 0;
+
 export default async function Cabins() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 md:py-24 text-primary-10 font-josefineSans animate-fadeIn">
