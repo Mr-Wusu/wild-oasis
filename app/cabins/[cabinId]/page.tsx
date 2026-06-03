@@ -6,8 +6,6 @@ import { Suspense } from "react";
 import LazyImage from "@/app/_components/LazyImage";
 import ImageSkeleton from "@/app/_components/ImageSkeleton";
 
-
-
 type Props = {
   params: { cabinId: string };
 };
@@ -30,7 +28,6 @@ export default async function CabinPage({ params }: Props) {
 
   const { name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
-
 
   return (
     <div className="max-w-7xl min-h-screen mx-auto px-4 sm:px-6 lg:px-8  md:py-16 lg:py-20 md:pt-20 font-josefineSans text-primary-10 flex flex-col lg:flex-row items-center justify-center ">
@@ -129,7 +126,7 @@ export default async function CabinPage({ params }: Props) {
               <h2 className="text-xl font-semibold text-accent-400 mb-1 md:text-lg md:mb-2">
                 About this cabin
               </h2>
-              <p className="text-base leading-relaxed text-primary-200 md:text-sm lg:text-base">
+              <p className="text-base leading-relaxed text-primary-200 md:text-sm lg:text-base ">
                 {description}
               </p>
             </div>
