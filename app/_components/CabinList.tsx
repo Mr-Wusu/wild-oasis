@@ -1,8 +1,10 @@
 import CabinCard from "./CabinCard";
 import { Cabin } from "@/generated/prisma";
 import { getCabins } from "@/lib/authService";
+import { unstable_noStore as noStore } from "next/cache";
 
 async function CabinList() {
+  noStore();
   const cabins: Cabin[] = await getCabins();
 
   if(!cabins.length) return null

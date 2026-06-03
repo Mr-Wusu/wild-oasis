@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import { ClipLoader } from "react-spinners";
 
-export const revalidate = 0;
+// export const revalidate = 15;
 
 export default async function Cabins() {
   return (
