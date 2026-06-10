@@ -115,6 +115,18 @@ export async function createCabin(data: {
 
   export async function getOccupiedCabins() {}
 
+  export async function getBookedDatesByCabinId(id: string) {
+    return prisma.cabin.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
+  export async function getSettings() {}
+
+
+
 
 
 

@@ -25,19 +25,49 @@ model User {
 }
 
 model Cabin {
-  id           String  @id @default(cuid())
+  id           String    @id @default(cuid())
   discount     Int
-  name         String  @unique
+  name         String    @unique
   maxCapacity  Int
   numGuard     Int
   image        String
-  userid       String? @unique
+  userid       String?   @unique
   regularPrice Int
   description  String
-  guest        User?   @relation(fields: [userid], references: [id], onDelete: SetNull)
+  bookings     Booking[]
+  guest        User?     @relation(fields: [userid], references: [id], onDelete: SetNull)
 
   @@index([name])
   @@map("cabins")
+}
+
+model Booking {
+  id         String   @id @default(cuid())
+  cabinId    String
+  cabin      Cabin    @relation(fields: [cabinId], references: [id], onDelete: Cascade)
+  guestName  String
+  email      String
+  numGuests  Int
+  totalPrice Float
+  startDate  DateTime
+  endDate    DateTime
+  isPaid     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([cabinId])
+  @@index([startDate, endDate])
+  @@map("bookings")
+}
+
+model Settings {
+  id                  String @id @default(cuid())
+  minBookingLength    Int    @default(1)
+  maxBookingLength    Int    @default(90)
+  maxGuestsPerBooking Int    @default(10)
+  breakfastPrice      Float  @default(15)
+
+  @@map("settings")
 }
 
 enum Role {

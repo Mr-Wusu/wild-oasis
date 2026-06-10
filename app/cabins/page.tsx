@@ -3,8 +3,15 @@ import CabinList from "../_components/CabinList";
 import { ClipLoader } from "react-spinners";
 
 // export const revalidate = 15;
+interface CabinPageProps {
+  searchParams: {
+    capacity: string;
+  };
+}
 
-export default async function Cabins() {
+export default async function Cabins({ searchParams }: CabinPageProps) {
+  const params = await searchParams;
+  const filter = params?.capacity ?? "all";
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 md:py-24 text-primary-10 font-josefineSans animate-fadeIn">
       {/* Header */}
@@ -32,8 +39,9 @@ export default async function Cabins() {
             />
           </div>
         }
+        key={filter}
       >
-        <CabinList />
+        <CabinList filter={filter} />
       </Suspense>
     </div>
   );

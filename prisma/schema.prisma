@@ -36,11 +36,42 @@ model Cabin {
   userid String? @unique
   regularPrice Int
   description String
+  bookings Booking[]
   guest User?  @relation(fields: [userid], references: [id], onDelete: SetNull)
   
   @@map("cabins")
   @@index([name])
 }
+
+model Booking {
+  id         String   @id @default(cuid())
+  cabinId    String
+  cabin      Cabin    @relation(fields: [cabinId], references: [id], onDelete: Cascade)
+  guestName  String
+  email      String
+  numGuests  Int
+  totalPrice Float
+  startDate  DateTime
+  endDate    DateTime
+  isPaid     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("bookings")
+  @@index([cabinId])
+  @@index([startDate, endDate])
+}
+
+model Settings {
+  id                  String   @id @default(cuid())
+  minBookingLength    Int   @default(1)
+  maxBookingLength    Int   @default(90)
+  maxGuestsPerBooking Int   @default(10)
+  breakfastPrice      Float @default(15)
+
+  @@map("settings")
+}
+
 
 enum Role {
   ADMIN

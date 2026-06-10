@@ -1,10 +1,15 @@
 import { notFound } from "next/navigation";
-import { getCabinById } from "@/lib/authService";
+import {
+  getCabinById,
+  getBookedDatesByCabinId,
+  getSettings,
+} from "@/lib/authService";
 import { UsersIcon, MapPinIcon } from "@heroicons/react/24/solid";
 import BackArrow from "@/app/_components/BackArrow";
 import { Suspense } from "react";
 import LazyImage from "@/app/_components/LazyImage";
 import ImageSkeleton from "@/app/_components/ImageSkeleton";
+import DateSelector from "@/app/_components/DateSelector";
 
 type Props = {
   params: { cabinId: string };
@@ -20,7 +25,11 @@ type Props = {
 
 export default async function CabinPage({ params }: Props) {
   const { cabinId } = await params;
-  const cabin = await getCabinById(cabinId);
+  const [cabin, bookedDates, settings] = await Promise.all([
+    getCabinById(cabinId),
+    getBookedDatesByCabinId(cabinId),
+    getSettings(),
+  ]);
 
   if (!cabin) {
     notFound();
@@ -30,7 +39,7 @@ export default async function CabinPage({ params }: Props) {
     cabin;
 
   return (
-    <div className="max-w-7xl min-h-screen mx-auto px-4 sm:px-6 lg:px-8  md:py-16 lg:py-20 md:pt-20 font-josefineSans text-primary-10 flex flex-col lg:flex-row items-center justify-center ">
+    <div className="max-w-7xl min-h-screen mx-auto px-4 sm:px-6 lg:px-8  md:py-16 lg:py-20 md:pt-20 font-josefineSans text-primary-10 flex flex-col lg:gap-6 items-center justify-center ">
       <div
         className="
         flex flex-col shadow-md shadow-primary-3 max-w-md w-[85vw] mx-auto gap-4.5  rounded-sm border          md:max-w-3xl md:w-[90vw] h-145 border-primary-800 
@@ -132,11 +141,17 @@ export default async function CabinPage({ params }: Props) {
             </div>
 
             {/* CTA */}
-            <button className="w-full rounded-sm bg-primary-8 py-2.5 hover:bg-primary-7   text-lg font-medium text-primary-1 transition ease-in cursor-pointer md:py-3 md:text-base lg:py-4 lg:text-lg">
-              Reserve now
-            </button>
+
           </div>
         </div>
+      </div>
+      <div className="flex flex-col">
+        <h1 className="text-3xl">Reserve {name} today. Pay on arrival</h1>
+        <DateSelector
+          settings={settings}
+          cabin={cabin}
+          bookedDates={bookedDates}
+        />
       </div>
     </div>
   );

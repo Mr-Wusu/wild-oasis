@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import about1 from "@/public/about-1.jpg";
 import about2 from "@/public/about-2.jpg";
-import { getCabins } from "@/lib/authService";
 
-export const revalidate = 86400;
+import { Suspense } from "react";
+import TotalCabins from "../_components/TotalCabins";
+
+// export const revalidate = 86400;
 
 export default async function About() {
-  const cabins = await getCabins();
-  const totalCabins = cabins.length;
+
   return (
     <div
       className="grid grid-cols-1 gap-y-16 text-base items-center px-6 pt-26 font-josefineSans text-primary-10
@@ -30,7 +31,7 @@ export default async function About() {
             and enjoying simple pleasures with family.
           </p>
           <div>
-            Our {totalCabins} {" "}luxury cabins provide a cozy base, but the real
+            Our <Suspense fallback={<span className="mr-1">loading...</span>}><TotalCabins/></Suspense> luxury cabins provide a cozy base, but the real
             freedom and peace you&lsquo;ll find in the surrounding mountains.
             Wander through lush forests, breathe in the fresh air, and watch the
             stars twinkle above from the warmth of a campfire or your hot tub.

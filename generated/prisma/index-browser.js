@@ -143,6 +143,28 @@ exports.Prisma.CabinScalarFieldEnum = {
   description: 'description'
 };
 
+exports.Prisma.BookingScalarFieldEnum = {
+  id: 'id',
+  cabinId: 'cabinId',
+  guestName: 'guestName',
+  email: 'email',
+  numGuests: 'numGuests',
+  totalPrice: 'totalPrice',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isPaid: 'isPaid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SettingsScalarFieldEnum = {
+  id: 'id',
+  minBookingLength: 'minBookingLength',
+  maxBookingLength: 'maxBookingLength',
+  maxGuestsPerBooking: 'maxGuestsPerBooking',
+  breakfastPrice: 'breakfastPrice'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -165,7 +187,9 @@ exports.Role = exports.$Enums.Role = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Cabin: 'Cabin'
+  Cabin: 'Cabin',
+  Booking: 'Booking',
+  Settings: 'Settings'
 };
 
 /**

@@ -9,8 +9,8 @@ import {
 } from "@/lib/fonts";
 import { HomePageProvider } from "@/contexts/homePageContext";
 import Navbar from "@/app/_components/Navigation/Navbar";
-// import Footer from "@/app/_components/Footer/Footer";
 import { Toaster } from "react-hot-toast";
+import { ReservationProvider } from "@/contexts/ReservationContext";
 
 export const metadata: Metadata = {
   title: "The Wild Oasis | Welcome to Paradise",
@@ -37,8 +37,7 @@ export default async function RootLayout({
       <body className="min-h-screen overflow-x-hidden">
         <HomePageProvider>
           <Navbar />
-
-          {children}
+          <ReservationProvider>{children}</ReservationProvider>
 
           {/* <Footer /> */}
           <Toaster
