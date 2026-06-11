@@ -55,7 +55,7 @@ export default function Error({ error, reset }: ErrorProps) {
           className="mb-8 text-base text-primary-200 leading-relaxed
                       sm:text-lg min-:text-lg"
         >
-          We couldn&lsquo;t load this cabin. An unexpected error occurred on our
+          We couldn&lsquo;t load the requested resource. An unexpected error occurred on our
           end.
         </p>
 
@@ -64,7 +64,7 @@ export default function Error({ error, reset }: ErrorProps) {
           <button
             onClick={reset}
             className="rounded-sm bg-primary-7 px-4 py-2.5 text-sm font-medium text-primary-1 transition hover:bg-primary-6
-                       sm:px-5 sm:py-3 sm:text-base md:px-6"
+                       sm:px-5 sm:py-3 sm:text-base md:px-6 cursor-pointer"
           >
             Try again
           </button>
@@ -74,7 +74,7 @@ export default function Error({ error, reset }: ErrorProps) {
             className="rounded-sm border border-primary-700 px-4 py-2.5 text-sm font-medium bg-transparent text-primary-10 transition hover:bg-primary-6 hover:text-primary-1 
                        sm:px-5 sm:py-3 sm:text-base md:px-6"
           >
-            Back to cabins
+            Back home
           </Link>
         </div>
 

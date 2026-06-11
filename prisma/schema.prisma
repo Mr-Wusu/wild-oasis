@@ -64,6 +64,7 @@ model Booking {
 
 model Settings {
   id                  String   @id @default(cuid())
+  key                 String @unique @default("default")
   minBookingLength    Int   @default(1)
   maxBookingLength    Int   @default(90)
   maxGuestsPerBooking Int   @default(10)

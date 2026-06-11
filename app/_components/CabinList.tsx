@@ -2,7 +2,7 @@ import CabinCard from "./CabinCard";
 import { Cabin } from "@/generated/prisma";
 import { getCabins } from "@/lib/authService";
 import { unstable_noStore as noStore } from "next/cache";
-import Filter from "./Filter";
+// import Filter from "./Filter";
 
 async function CabinList({ filter }: { filter: string }) {
   noStore();
@@ -25,7 +25,7 @@ async function CabinList({ filter }: { filter: string }) {
   if (!cabins.length) return null;
   return (
     <>
-      <Filter/>
+      
       <div
         className="
           grid grid-cols-1 gap-6

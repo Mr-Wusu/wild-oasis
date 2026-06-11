@@ -4711,6 +4711,7 @@ export namespace Prisma {
 
   export type SettingsMinAggregateOutputType = {
     id: string | null
+    key: string | null
     minBookingLength: number | null
     maxBookingLength: number | null
     maxGuestsPerBooking: number | null
@@ -4719,6 +4720,7 @@ export namespace Prisma {
 
   export type SettingsMaxAggregateOutputType = {
     id: string | null
+    key: string | null
     minBookingLength: number | null
     maxBookingLength: number | null
     maxGuestsPerBooking: number | null
@@ -4727,6 +4729,7 @@ export namespace Prisma {
 
   export type SettingsCountAggregateOutputType = {
     id: number
+    key: number
     minBookingLength: number
     maxBookingLength: number
     maxGuestsPerBooking: number
@@ -4751,6 +4754,7 @@ export namespace Prisma {
 
   export type SettingsMinAggregateInputType = {
     id?: true
+    key?: true
     minBookingLength?: true
     maxBookingLength?: true
     maxGuestsPerBooking?: true
@@ -4759,6 +4763,7 @@ export namespace Prisma {
 
   export type SettingsMaxAggregateInputType = {
     id?: true
+    key?: true
     minBookingLength?: true
     maxBookingLength?: true
     maxGuestsPerBooking?: true
@@ -4767,6 +4772,7 @@ export namespace Prisma {
 
   export type SettingsCountAggregateInputType = {
     id?: true
+    key?: true
     minBookingLength?: true
     maxBookingLength?: true
     maxGuestsPerBooking?: true
@@ -4862,6 +4868,7 @@ export namespace Prisma {
 
   export type SettingsGroupByOutputType = {
     id: string
+    key: string
     minBookingLength: number
     maxBookingLength: number
     maxGuestsPerBooking: number
@@ -4889,6 +4896,7 @@ export namespace Prisma {
 
   export type SettingsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    key?: boolean
     minBookingLength?: boolean
     maxBookingLength?: boolean
     maxGuestsPerBooking?: boolean
@@ -4897,6 +4905,7 @@ export namespace Prisma {
 
   export type SettingsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    key?: boolean
     minBookingLength?: boolean
     maxBookingLength?: boolean
     maxGuestsPerBooking?: boolean
@@ -4905,6 +4914,7 @@ export namespace Prisma {
 
   export type SettingsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    key?: boolean
     minBookingLength?: boolean
     maxBookingLength?: boolean
     maxGuestsPerBooking?: boolean
@@ -4913,19 +4923,21 @@ export namespace Prisma {
 
   export type SettingsSelectScalar = {
     id?: boolean
+    key?: boolean
     minBookingLength?: boolean
     maxBookingLength?: boolean
     maxGuestsPerBooking?: boolean
     breakfastPrice?: boolean
   }
 
-  export type SettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "minBookingLength" | "maxBookingLength" | "maxGuestsPerBooking" | "breakfastPrice", ExtArgs["result"]["settings"]>
+  export type SettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "minBookingLength" | "maxBookingLength" | "maxGuestsPerBooking" | "breakfastPrice", ExtArgs["result"]["settings"]>
 
   export type $SettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Settings"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      key: string
       minBookingLength: number
       maxBookingLength: number
       maxGuestsPerBooking: number
@@ -5354,6 +5366,7 @@ export namespace Prisma {
    */
   interface SettingsFieldRefs {
     readonly id: FieldRef<"Settings", 'String'>
+    readonly key: FieldRef<"Settings", 'String'>
     readonly minBookingLength: FieldRef<"Settings", 'Int'>
     readonly maxBookingLength: FieldRef<"Settings", 'Int'>
     readonly maxGuestsPerBooking: FieldRef<"Settings", 'Int'>
@@ -5791,6 +5804,7 @@ export namespace Prisma {
 
   export const SettingsScalarFieldEnum: {
     id: 'id',
+    key: 'key',
     minBookingLength: 'minBookingLength',
     maxBookingLength: 'maxBookingLength',
     maxGuestsPerBooking: 'maxGuestsPerBooking',
@@ -6151,6 +6165,7 @@ export namespace Prisma {
     OR?: SettingsWhereInput[]
     NOT?: SettingsWhereInput | SettingsWhereInput[]
     id?: StringFilter<"Settings"> | string
+    key?: StringFilter<"Settings"> | string
     minBookingLength?: IntFilter<"Settings"> | number
     maxBookingLength?: IntFilter<"Settings"> | number
     maxGuestsPerBooking?: IntFilter<"Settings"> | number
@@ -6159,6 +6174,7 @@ export namespace Prisma {
 
   export type SettingsOrderByWithRelationInput = {
     id?: SortOrder
+    key?: SortOrder
     minBookingLength?: SortOrder
     maxBookingLength?: SortOrder
     maxGuestsPerBooking?: SortOrder
@@ -6167,6 +6183,7 @@ export namespace Prisma {
 
   export type SettingsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    key?: string
     AND?: SettingsWhereInput | SettingsWhereInput[]
     OR?: SettingsWhereInput[]
     NOT?: SettingsWhereInput | SettingsWhereInput[]
@@ -6174,10 +6191,11 @@ export namespace Prisma {
     maxBookingLength?: IntFilter<"Settings"> | number
     maxGuestsPerBooking?: IntFilter<"Settings"> | number
     breakfastPrice?: FloatFilter<"Settings"> | number
-  }, "id">
+  }, "id" | "key">
 
   export type SettingsOrderByWithAggregationInput = {
     id?: SortOrder
+    key?: SortOrder
     minBookingLength?: SortOrder
     maxBookingLength?: SortOrder
     maxGuestsPerBooking?: SortOrder
@@ -6194,6 +6212,7 @@ export namespace Prisma {
     OR?: SettingsScalarWhereWithAggregatesInput[]
     NOT?: SettingsScalarWhereWithAggregatesInput | SettingsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Settings"> | string
+    key?: StringWithAggregatesFilter<"Settings"> | string
     minBookingLength?: IntWithAggregatesFilter<"Settings"> | number
     maxBookingLength?: IntWithAggregatesFilter<"Settings"> | number
     maxGuestsPerBooking?: IntWithAggregatesFilter<"Settings"> | number
@@ -6467,6 +6486,7 @@ export namespace Prisma {
 
   export type SettingsCreateInput = {
     id?: string
+    key?: string
     minBookingLength?: number
     maxBookingLength?: number
     maxGuestsPerBooking?: number
@@ -6475,6 +6495,7 @@ export namespace Prisma {
 
   export type SettingsUncheckedCreateInput = {
     id?: string
+    key?: string
     minBookingLength?: number
     maxBookingLength?: number
     maxGuestsPerBooking?: number
@@ -6483,6 +6504,7 @@ export namespace Prisma {
 
   export type SettingsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
     minBookingLength?: IntFieldUpdateOperationsInput | number
     maxBookingLength?: IntFieldUpdateOperationsInput | number
     maxGuestsPerBooking?: IntFieldUpdateOperationsInput | number
@@ -6491,6 +6513,7 @@ export namespace Prisma {
 
   export type SettingsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
     minBookingLength?: IntFieldUpdateOperationsInput | number
     maxBookingLength?: IntFieldUpdateOperationsInput | number
     maxGuestsPerBooking?: IntFieldUpdateOperationsInput | number
@@ -6499,6 +6522,7 @@ export namespace Prisma {
 
   export type SettingsCreateManyInput = {
     id?: string
+    key?: string
     minBookingLength?: number
     maxBookingLength?: number
     maxGuestsPerBooking?: number
@@ -6507,6 +6531,7 @@ export namespace Prisma {
 
   export type SettingsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
     minBookingLength?: IntFieldUpdateOperationsInput | number
     maxBookingLength?: IntFieldUpdateOperationsInput | number
     maxGuestsPerBooking?: IntFieldUpdateOperationsInput | number
@@ -6515,6 +6540,7 @@ export namespace Prisma {
 
   export type SettingsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
     minBookingLength?: IntFieldUpdateOperationsInput | number
     maxBookingLength?: IntFieldUpdateOperationsInput | number
     maxGuestsPerBooking?: IntFieldUpdateOperationsInput | number
@@ -6863,6 +6889,7 @@ export namespace Prisma {
 
   export type SettingsCountOrderByAggregateInput = {
     id?: SortOrder
+    key?: SortOrder
     minBookingLength?: SortOrder
     maxBookingLength?: SortOrder
     maxGuestsPerBooking?: SortOrder
@@ -6878,6 +6905,7 @@ export namespace Prisma {
 
   export type SettingsMaxOrderByAggregateInput = {
     id?: SortOrder
+    key?: SortOrder
     minBookingLength?: SortOrder
     maxBookingLength?: SortOrder
     maxGuestsPerBooking?: SortOrder
@@ -6886,6 +6914,7 @@ export namespace Prisma {
 
   export type SettingsMinOrderByAggregateInput = {
     id?: SortOrder
+    key?: SortOrder
     minBookingLength?: SortOrder
     maxBookingLength?: SortOrder
     maxGuestsPerBooking?: SortOrder

@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import { ClipLoader } from "react-spinners";
+import Filter from "../_components/Filter";
 
 // export const revalidate = 15;
 interface CabinPageProps {
@@ -28,6 +29,7 @@ export default async function Cabins({ searchParams }: CabinPageProps) {
           vacation. Welcome to paradise.
         </p>
       </header>
+      <Filter/>
       <Suspense
         fallback={
           <div className="flex flex-col h-full items-center justify-center text-primary-10">

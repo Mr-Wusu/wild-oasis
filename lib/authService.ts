@@ -1,4 +1,3 @@
-
 import {
   checkUserPermission,
   generateToken,
@@ -10,7 +9,6 @@ import { prisma } from "@/lib/db";
 import { Role } from "../generated/prisma";
 import { cookies } from "next/headers";
 
-
 export async function registerUser(data: {
   firstname: string;
   surname: string;
@@ -20,7 +18,7 @@ export async function registerUser(data: {
   const { firstname, surname, email, password } = data;
 
   const existingUser = await prisma.user.findUnique({ where: { email } });
-  if (existingUser) throw new Error("Email already taken!"); 
+  if (existingUser) throw new Error("Email already taken!");
 
   const hashedPassword = await hashPassword(password);
   const userCount = await prisma.user.count();
@@ -34,11 +32,12 @@ export async function registerUser(data: {
 
 export async function loginUser(data: { email: string; password: string }) {
   const { email, password } = data;
-  if(!email || !password) throw new Error("Email and password are both required")
+  if (!email || !password)
+    throw new Error("Email and password are both required");
 
   const userFromDB = await prisma.user.findUnique({
     where: { email },
-    include: { cabin: true, },
+    include: { cabin: true },
   });
 
   if (!userFromDB) throw new Error("Invalid credentials");
@@ -69,19 +68,17 @@ export async function logoutUser() {
     sameSite: "lax",
     maxAge: 0,
   });
-
 }
 
-export const getUsers = 
-  async () => {
-    const user = await getCurrentuser()
-    if(!user) throw new Error("You are not logged in")
-    const hasRight = checkUserPermission(user, Role.TEST_ADMIN)
-    if(!hasRight) throw new Error("You have no such priviledge!")
-      return prisma.user.findMany({
-      orderBy: { createdAt: "desc" },
-    });
-  }
+export const getUsers = async () => {
+  const user = await getCurrentuser();
+  if (!user) throw new Error("You are not logged in");
+  const hasRight = checkUserPermission(user, Role.TEST_ADMIN);
+  if (!hasRight) throw new Error("You have no such priviledge!");
+  return prisma.user.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+};
 
 export async function createCabin(data: {
   name: string;
@@ -95,39 +92,56 @@ export async function createCabin(data: {
   return prisma.cabin.create({ data });
 }
 
-  export async function getCabins() {
-    return prisma.cabin.findMany({
-      orderBy: {
-        regularPrice: "desc"
-      }
-    })
+export async function getCabins() {
+  return prisma.cabin.findMany({
+    orderBy: {
+      regularPrice: "desc",
+    },
+  });
+}
+
+export async function getCabinById(id: string) {
+  return prisma.cabin.findFirst({
+    where: {
+      id,
+    },
+  });
+}
+
+export async function getAvailableCabins() {}
+
+export async function getOccupiedCabins() {}
+
+export async function getBookedDatesByCabinId(id: string) {
+  const bookings = await prisma.booking.findMany({
+    where: { cabinId: id },
+    select: { startDate: true, endDate: true },
+  });
+
+  const bookedDates: Date[] = [];
+  for (const booking of bookings) {
+    const current = new Date(booking.startDate);
+    const endDate = new Date(booking.endDate);
+    while (current <= endDate) {
+      bookedDates.push(new Date(current));
+      current.setDate(current.getDate() + 1);
+    }
   }
 
-  export async function getCabinById(id: string) {
-    return prisma.cabin.findUnique({
-      where: {
-        id
-      }
-    })
+  return bookedDates;
+}
+
+export async function getSettings() {
+  const settings = await prisma.settings.findUnique({
+    where: { key: "default" }, // ← more reliable than findFirst()
+  });
+
+  if (!settings) {
+    return { minBookingLength: 1, maxBookingLength: 90 };
   }
 
-  export async function getAvailableCabins() {}
-
-  export async function getOccupiedCabins() {}
-
-  export async function getBookedDatesByCabinId(id: string) {
-    return prisma.cabin.findUnique({
-      where: {
-        id,
-      },
-    });
-  }
-
-  export async function getSettings() {}
-
-
-
-
-
-
-
+  return {
+    minBookingLength: settings.minBookingLength,
+    maxBookingLength: settings.maxBookingLength,
+  };
+}

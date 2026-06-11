@@ -159,6 +159,7 @@ exports.Prisma.BookingScalarFieldEnum = {
 
 exports.Prisma.SettingsScalarFieldEnum = {
   id: 'id',
+  key: 'key',
   minBookingLength: 'minBookingLength',
   maxBookingLength: 'maxBookingLength',
   maxGuestsPerBooking: 'maxGuestsPerBooking',

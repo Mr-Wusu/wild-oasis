@@ -14,18 +14,10 @@ import DateSelector from "@/app/_components/DateSelector";
 type Props = {
   params: { cabinId: string };
 };
-// To change this route to be a SSG route
-// export async function generateStaticParams() {
-//   const cabins = await getCabins();
-//   const ids = cabins.map((cabin) => ({
-//     cabinId: String(cabin.id)
-//   }));
-//   return ids
-// }
 
 export default async function CabinPage({ params }: Props) {
-  const { cabinId } = await params;
-  const [cabin, bookedDates, settings] = await Promise.all([
+  const { cabinId } = params;
+  const [cabin, bookedDatesResult, settings] = await Promise.all([
     getCabinById(cabinId),
     getBookedDatesByCabinId(cabinId),
     getSettings(),
@@ -34,6 +26,10 @@ export default async function CabinPage({ params }: Props) {
   if (!cabin) {
     notFound();
   }
+
+  const bookedDates: Date[] = Array.isArray(bookedDatesResult)
+    ? bookedDatesResult
+    : [];
 
   const { name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
@@ -51,7 +47,6 @@ export default async function CabinPage({ params }: Props) {
       "
       >
         <BackArrow />
-        {/* Image - top on mobile, left on md+ */}
         <div
           className="
           relative h-64 w-full shrink-0 overflow-hidden
@@ -66,9 +61,7 @@ export default async function CabinPage({ params }: Props) {
           </Suspense>
         </div>
 
-        {/* Content - below on mobile, right on md+ */}
         <div className="flex flex-col grow px-5 pb-8 md:px-0 md:pr-8 md:py-8 lg:pr-12 lg:py-10">
-          {/* Cabin name - drops size at md */}
           <h1
             className="text-3xl font-semibold text-accent-500 tracking-wide mb-3
                          sm:text-4xl
@@ -79,17 +72,14 @@ export default async function CabinPage({ params }: Props) {
             {name}
           </h1>
 
-          {/* Meta info */}
           <div className="flex gap-10">
             <div className="flex flex-col mb-6 md:mb-5 md:gap-2.5">
               <div className="flex gap-2 items-center">
                 <UsersIcon className="h-5 w-5 text-primary-600 shrink-0 md:h-4 md:w-4" />
                 <p className="text-lg text-primary-200 md:text-base">
-                  For up to{" "}
-                  <span className="font-bold text-primary-10">
+                  For up to <span className="font-bold text-primary-10">
                     {maxCapacity}
-                  </span>{" "}
-                  guests
+                  </span> guests
                 </p>
               </div>
 
@@ -101,7 +91,6 @@ export default async function CabinPage({ params }: Props) {
               </div>
             </div>
 
-            {/* Price - also scales down at md */}
             <div className="flex gap-2 items-end mb-8 md:mb-6">
               {discount > 0 ? (
                 <>
@@ -130,7 +119,6 @@ export default async function CabinPage({ params }: Props) {
             </div>
           </div>
           <div>
-            {/* Description */}
             <div className="mb-8 md:mb-6">
               <h2 className="text-xl font-semibold text-accent-400 mb-1 md:text-lg md:mb-2">
                 About this cabin
@@ -139,19 +127,12 @@ export default async function CabinPage({ params }: Props) {
                 {description}
               </p>
             </div>
-
-            {/* CTA */}
-
           </div>
         </div>
       </div>
       <div className="flex flex-col">
         <h1 className="text-3xl">Reserve {name} today. Pay on arrival</h1>
-        <DateSelector
-          settings={settings}
-          cabin={cabin}
-          bookedDates={bookedDates}
-        />
+        <DateSelector settings={settings} cabin={cabin} bookedDates={bookedDates} />
       </div>
     </div>
   );

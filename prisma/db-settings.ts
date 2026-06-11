@@ -3,7 +3,7 @@ import { prisma } from "@/lib/db";
 async function main() {
   // Upsert so re-running the seed never creates duplicates
   await prisma.settings.upsert({
-    where 
+    where: { key: "default" }, // ← stable anchor to find the row
     update: {},
     create: {
       minBookingLength: 2,
