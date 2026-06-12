@@ -4,7 +4,7 @@ import about1 from "@/public/about-1.jpg";
 import about2 from "@/public/about-2.jpg";
 
 import { Suspense } from "react";
-import TotalCabins from "../_components/TotalCabins";
+import TotalCabins from "../_components/CabinComponents/TotalCabins";
 
 // export const revalidate = 86400;
 
