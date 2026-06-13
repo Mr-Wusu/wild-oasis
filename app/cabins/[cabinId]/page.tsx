@@ -148,7 +148,7 @@ export default async function CabinPage({ params }: Props) {
             cabin={cabin}
             bookedDates={bookedDates}
           />
-          <BookingInfo />
+          <BookingInfo cabinId={cabinId} />
         </div>
       </div>
     </div>

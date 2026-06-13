@@ -1,0 +1,24 @@
+.rdp-root {
+  --rdp-accent-color: #5c940d;
+  --rdp-accent-background-color: #5c940d;
+  --rdp-selected-color: #d8f5a2;
+
+  --rdp-range_start-date-background-color: #5c940d;
+  --rdp-range_end-date-background-color: #5c940d;
+  --rdp-range_start-color: #d8f5a2;
+  --rdp-range_end-color: #d8f5a2;
+
+  --rdp-range_middle-background-color: rgba(92, 148, 13, 0.18);
+  --rdp-range_middle-color: #3a6b00;
+}
+
+/* Dropdown chevron SVGs */
+.rdp-chevron {
+  fill: #5c940d !important;
+}
+
+/* Native <select> focus ring */
+.rdp-dropdown select:focus {
+  outline-color: #5c940d;
+  border-color: #5c940d;
+}

@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import CabinList from "../_components/CabinComponents/CabinList";
 import { ClipLoader } from "react-spinners";
 import Filter from "../_components/CabinComponents/Filter";
+import ReservationReminder from "../_components/Reservations/ReservationReminder";
 
 // export const revalidate = 15;
 interface CabinPageProps {
@@ -44,6 +45,7 @@ export default async function Cabins({ searchParams }: CabinPageProps) {
         key={filter}
       >
         <CabinList filter={filter} />
+        <ReservationReminder/>
       </Suspense>
     </div>
   );
