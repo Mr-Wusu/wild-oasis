@@ -9,21 +9,64 @@ generator client {
   output   = "../generated/prisma"
 }
 
-// Your models remain completely untouched
+
+
 model User {
   id    String @id @default(cuid())
   email String @unique
-  password String
+  emailVerified Boolean   @default(false)
+  name String
   firstname String
   surname String
-  role Role @default(USER)
+  role          Role      @default(USER)
+  sessions      Session[]
+  accounts      Account[]
   cabin Cabin?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
+  image         String?
   @@map("users")
   @@index([email])
-  @@index([role])
+
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  password              String?   
+  createdAt             DateTime
+  updatedAt             DateTime
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Cabin {
