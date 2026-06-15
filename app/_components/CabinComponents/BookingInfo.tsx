@@ -1,4 +1,6 @@
+
 import { getCabinById } from "@/lib/authService";
+import ReservationButton from "../Reservations/ReservationButton";
 
 async function BookingInfo({cabinId}: {cabinId: string})  {
   const cabin = await getCabinById(cabinId);
@@ -33,12 +35,7 @@ async function BookingInfo({cabinId}: {cabinId: string})  {
        </div>
        <div className="flex">
          <p>Start by selecting dates</p>
-         <button
-           className="bg-primary-6 text-primary-1 ml-auto px-2.5 py-1.5 rounded-sm cursor-pointer hover:bg-primary-5 transition-colors duration-200 ease-out"
-           type="submit"
-         >
-           Reserve now
-         </button>
+         <ReservationButton/>
        </div>
      </form>
    </div>

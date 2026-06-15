@@ -1,5 +1,6 @@
 import Image from "next/image";
 import bg from "@/public/bg.png"
+import Link from "next/link";
 
 function Hero() {
   return (
@@ -17,9 +18,9 @@ function Hero() {
         <h1 className="text-primary-1 text-6xl tracking-wider font-josefineSans text-center">
           Welcome to paradise.
         </h1>
-        <button className="cursor-pointer bg-primary-9 text-primary-1 px-6 py-3 font-josefineSans">
+        <Link href="/cabins" className="cursor-pointer bg-primary-9 text-primary-1 px-6 py-3 font-josefineSans">
           Explore luxury cabins
-        </button>
+        </Link>
       </div>
     </div>
   );
