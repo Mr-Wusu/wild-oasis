@@ -16,8 +16,8 @@ model User {
   email String @unique
   emailVerified Boolean   @default(false)
   name String
-  firstname String
-  surname String
+  firstname String @default("")
+  surname String @default("")
   role          Role      @default(USER)
   sessions      Session[]
   accounts      Account[]
@@ -68,6 +68,8 @@ model Verification {
   expiresAt  DateTime
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+
+  @@map("verification")
 }
 
 model Cabin {

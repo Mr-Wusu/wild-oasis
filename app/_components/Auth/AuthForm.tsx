@@ -18,7 +18,7 @@ export default function SignUpForm({ mode }: AuthFormProps) {
   return (
     <form
       action={formAction}
-      className="flex flex-col gap-4 max-w-md mx-auto mt-10 font-josefineSans"
+      className="flex flex-col gap-4 max-w-md mx-auto mt-7 font-josefineSans"
     >
       {mode === "sign-up" && (
         <div className="flex gap-2">

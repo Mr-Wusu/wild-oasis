@@ -12,7 +12,7 @@ const navLinks = [
   { href: "/guests", label: "Guest Area" },
 ];
 
-// ✅ Full class strings so Tailwind JIT can detect them at build time
+
 const staggerDelays = [
   "delay-[80ms]",
   "delay-[140ms]",
@@ -28,7 +28,7 @@ function NavbarClient() {
 
   if (prevPathname !== pathname) {
     setPrevPathname(pathname);
-    if (menuOpen) setMenuOpen(false);
+    if(menuOpen) setMenuOpen(false);
   }
 
   useEffect(() => {
@@ -49,8 +49,8 @@ function NavbarClient() {
           transition-all duration-300
           ${
             isTransparent
-              ? "bg-transparent text-primary-4 shadow-none"
-              : "bg-amber-50 text-primary-10 shadow-sm shadow-primary-10"
+              ? "bg-transparent text-primary-3 shadow-none"
+              : "bg-primary-1 text-primary-10 shadow-sm shadow-primary-10"
           }
         `}
       >

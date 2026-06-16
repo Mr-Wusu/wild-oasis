@@ -15,7 +15,7 @@ function Logo() {
         loading="eager"
       />
       <span
-        className={`text-3xl font-semibold  font-logo tracking-wider  ${isHomePage && !isScrolled ? " text-primary-4" : "text-primary-10"}`}
+        className={`text-3xl font-semibold  font-logo tracking-wider  ${isHomePage && !isScrolled ? " text-primary-2" : "text-primary-10"}`}
       >
         The Wild Oasis
       </span>

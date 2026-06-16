@@ -18,7 +18,7 @@ export function HomePageProvider({ children }: { children: React.ReactNode }) {
     }
     return false;
   });
-  const isHomePage = ["/", "/auth/sign-in", "/auth/sign-up"].includes(pathname);
+  const isHomePage = ["/"].includes(pathname);
 
   useEffect(() => {
     const handleScroll = () => {

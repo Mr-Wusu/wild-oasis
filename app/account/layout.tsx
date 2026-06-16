@@ -1,6 +1,8 @@
 import SideNavigation from "@/app/_components/Reservations/SideNavigation";
 import { Metadata } from "next";
 import { ReactNode } from "react";
+// import { getSession } from "@/lib/auth-getSession";
+// import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "The Wild Oasis",
@@ -9,7 +11,8 @@ export const metadata: Metadata = {
 };
 
 
-function layout  ({children}: {children: ReactNode})  {
+async function layout({children}: {children: ReactNode})  {
+  
  return (
  <div className="grid grid-cols-[16rem_1fr] h-full gap-12">
   <SideNavigation/>

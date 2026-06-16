@@ -1,13 +1,19 @@
 
 import { getCabinById } from "@/lib/authService";
 import ReservationButton from "../Reservations/ReservationButton";
+import { getSession } from "@/lib/auth-getSession";
+import { redirect } from "next/navigation";
 
 async function BookingInfo({cabinId}: {cabinId: string})  {
   const cabin = await getCabinById(cabinId);
+  const data = await getSession();
+  if (!data) redirect("/auth/sign-in");
+   
+    const { user } = data; 
  return (
    <div className="w-full lg:w-2/5 bg-primary-2 h-fit rounded-md overflow-hidden self-end">
      <h3 className="w-full bg-primary-3 text-primary-8 px-7 py-1.5">
-       Logged in as
+       Logged in as: {user.name}
      </h3>
      <form action="" className="px-7 py-5 flex flex-col gap-5">
        <div className="flex flex-col gap-1">

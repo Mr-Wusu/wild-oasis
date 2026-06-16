@@ -28,5 +28,5 @@ export async function signUpAction(_prevState: unknown, formData: FormData) {
     return { error: "Something went wrong" };
   }
 
-  redirect("/dashboard");
+  redirect("/account");
 }

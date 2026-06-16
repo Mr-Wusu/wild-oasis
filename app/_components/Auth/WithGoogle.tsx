@@ -10,7 +10,7 @@ export default function WithGoogle() {
     setPending(true);
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/dashboard",
+      callbackURL: "/account",
       errorCallbackURL: "/login?error=google-failed",
     });
     setPending(false);

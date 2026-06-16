@@ -123,10 +123,47 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  password: 'password',
+  emailVerified: 'emailVerified',
+  name: 'name',
   firstname: 'firstname',
   surname: 'surname',
   role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  image: 'image'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  expiresAt: 'expiresAt',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AccountScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  providerId: 'providerId',
+  userId: 'userId',
+  accessToken: 'accessToken',
+  refreshToken: 'refreshToken',
+  idToken: 'idToken',
+  accessTokenExpiresAt: 'accessTokenExpiresAt',
+  refreshTokenExpiresAt: 'refreshTokenExpiresAt',
+  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VerificationScalarFieldEnum = {
+  id: 'id',
+  identifier: 'identifier',
+  value: 'value',
+  expiresAt: 'expiresAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -188,6 +225,9 @@ exports.Role = exports.$Enums.Role = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Session: 'Session',
+  Account: 'Account',
+  Verification: 'Verification',
   Cabin: 'Cabin',
   Booking: 'Booking',
   Settings: 'Settings'
