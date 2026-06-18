@@ -3816,6 +3816,7 @@ export namespace Prisma {
     password: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    scope: string | null
   }
 
   export type AccountMaxAggregateOutputType = {
@@ -3831,6 +3832,7 @@ export namespace Prisma {
     password: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    scope: string | null
   }
 
   export type AccountCountAggregateOutputType = {
@@ -3846,6 +3848,7 @@ export namespace Prisma {
     password: number
     createdAt: number
     updatedAt: number
+    scope: number
     _all: number
   }
 
@@ -3863,6 +3866,7 @@ export namespace Prisma {
     password?: true
     createdAt?: true
     updatedAt?: true
+    scope?: true
   }
 
   export type AccountMaxAggregateInputType = {
@@ -3878,6 +3882,7 @@ export namespace Prisma {
     password?: true
     createdAt?: true
     updatedAt?: true
+    scope?: true
   }
 
   export type AccountCountAggregateInputType = {
@@ -3893,6 +3898,7 @@ export namespace Prisma {
     password?: true
     createdAt?: true
     updatedAt?: true
+    scope?: true
     _all?: true
   }
 
@@ -3981,6 +3987,7 @@ export namespace Prisma {
     password: string | null
     createdAt: Date
     updatedAt: Date
+    scope: string | null
     _count: AccountCountAggregateOutputType | null
     _min: AccountMinAggregateOutputType | null
     _max: AccountMaxAggregateOutputType | null
@@ -4013,6 +4020,7 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    scope?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -4029,6 +4037,7 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    scope?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -4045,6 +4054,7 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    scope?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -4061,9 +4071,10 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    scope?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "providerId" | "userId" | "accessToken" | "refreshToken" | "idToken" | "accessTokenExpiresAt" | "refreshTokenExpiresAt" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "providerId" | "userId" | "accessToken" | "refreshToken" | "idToken" | "accessTokenExpiresAt" | "refreshTokenExpiresAt" | "password" | "createdAt" | "updatedAt" | "scope", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -4092,6 +4103,7 @@ export namespace Prisma {
       password: string | null
       createdAt: Date
       updatedAt: Date
+      scope: string | null
     }, ExtArgs["result"]["account"]>
     composites: {}
   }
@@ -4528,6 +4540,7 @@ export namespace Prisma {
     readonly password: FieldRef<"Account", 'String'>
     readonly createdAt: FieldRef<"Account", 'DateTime'>
     readonly updatedAt: FieldRef<"Account", 'DateTime'>
+    readonly scope: FieldRef<"Account", 'String'>
   }
     
 
@@ -9464,7 +9477,8 @@ export namespace Prisma {
     refreshTokenExpiresAt: 'refreshTokenExpiresAt',
     password: 'password',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    scope: 'scope'
   };
 
   export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
@@ -9807,6 +9821,7 @@ export namespace Prisma {
     password?: StringNullableFilter<"Account"> | string | null
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
+    scope?: StringNullableFilter<"Account"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -9823,6 +9838,7 @@ export namespace Prisma {
     password?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    scope?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -9842,6 +9858,7 @@ export namespace Prisma {
     password?: StringNullableFilter<"Account"> | string | null
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
+    scope?: StringNullableFilter<"Account"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -9858,6 +9875,7 @@ export namespace Prisma {
     password?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    scope?: SortOrderInput | SortOrder
     _count?: AccountCountOrderByAggregateInput
     _max?: AccountMaxOrderByAggregateInput
     _min?: AccountMinOrderByAggregateInput
@@ -9879,6 +9897,7 @@ export namespace Prisma {
     password?: StringNullableWithAggregatesFilter<"Account"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
+    scope?: StringNullableWithAggregatesFilter<"Account"> | string | null
   }
 
   export type VerificationWhereInput = {
@@ -10169,8 +10188,8 @@ export namespace Prisma {
     email: string
     emailVerified?: boolean
     name: string
-    firstname: string
-    surname: string
+    firstname?: string
+    surname?: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10185,8 +10204,8 @@ export namespace Prisma {
     email: string
     emailVerified?: boolean
     name: string
-    firstname: string
-    surname: string
+    firstname?: string
+    surname?: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10233,8 +10252,8 @@ export namespace Prisma {
     email: string
     emailVerified?: boolean
     name: string
-    firstname: string
-    surname: string
+    firstname?: string
+    surname?: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10355,6 +10374,7 @@ export namespace Prisma {
     password?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    scope?: string | null
     user: UserCreateNestedOneWithoutAccountsInput
   }
 
@@ -10371,6 +10391,7 @@ export namespace Prisma {
     password?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    scope?: string | null
   }
 
   export type AccountUpdateInput = {
@@ -10385,6 +10406,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutAccountsNestedInput
   }
 
@@ -10401,6 +10423,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AccountCreateManyInput = {
@@ -10416,6 +10439,7 @@ export namespace Prisma {
     password?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    scope?: string | null
   }
 
   export type AccountUpdateManyMutationInput = {
@@ -10430,6 +10454,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AccountUncheckedUpdateManyInput = {
@@ -10445,6 +10470,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VerificationCreateInput = {
@@ -11009,6 +11035,7 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    scope?: SortOrder
   }
 
   export type AccountMaxOrderByAggregateInput = {
@@ -11024,6 +11051,7 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    scope?: SortOrder
   }
 
   export type AccountMinOrderByAggregateInput = {
@@ -11039,6 +11067,7 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    scope?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -11804,6 +11833,7 @@ export namespace Prisma {
     password?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    scope?: string | null
   }
 
   export type AccountUncheckedCreateWithoutUserInput = {
@@ -11818,6 +11848,7 @@ export namespace Prisma {
     password?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    scope?: string | null
   }
 
   export type AccountCreateOrConnectWithoutUserInput = {
@@ -11921,6 +11952,7 @@ export namespace Prisma {
     password?: StringNullableFilter<"Account"> | string | null
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
+    scope?: StringNullableFilter<"Account"> | string | null
   }
 
   export type CabinUpsertWithoutGuestInput = {
@@ -11963,8 +11995,8 @@ export namespace Prisma {
     email: string
     emailVerified?: boolean
     name: string
-    firstname: string
-    surname: string
+    firstname?: string
+    surname?: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11978,8 +12010,8 @@ export namespace Prisma {
     email: string
     emailVerified?: boolean
     name: string
-    firstname: string
-    surname: string
+    firstname?: string
+    surname?: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12039,8 +12071,8 @@ export namespace Prisma {
     email: string
     emailVerified?: boolean
     name: string
-    firstname: string
-    surname: string
+    firstname?: string
+    surname?: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12054,8 +12086,8 @@ export namespace Prisma {
     email: string
     emailVerified?: boolean
     name: string
-    firstname: string
-    surname: string
+    firstname?: string
+    surname?: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12151,8 +12183,8 @@ export namespace Prisma {
     email: string
     emailVerified?: boolean
     name: string
-    firstname: string
-    surname: string
+    firstname?: string
+    surname?: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12166,8 +12198,8 @@ export namespace Prisma {
     email: string
     emailVerified?: boolean
     name: string
-    firstname: string
-    surname: string
+    firstname?: string
+    surname?: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12341,6 +12373,7 @@ export namespace Prisma {
     password?: string | null
     createdAt: Date | string
     updatedAt: Date | string
+    scope?: string | null
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -12385,6 +12418,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AccountUncheckedUpdateWithoutUserInput = {
@@ -12399,6 +12433,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AccountUncheckedUpdateManyWithoutUserInput = {
@@ -12413,6 +12448,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BookingCreateManyCabinInput = {

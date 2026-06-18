@@ -156,7 +156,8 @@ exports.Prisma.AccountScalarFieldEnum = {
   refreshTokenExpiresAt: 'refreshTokenExpiresAt',
   password: 'password',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  scope: 'scope'
 };
 
 exports.Prisma.VerificationScalarFieldEnum = {

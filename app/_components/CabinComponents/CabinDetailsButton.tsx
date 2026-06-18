@@ -1,14 +1,14 @@
 "use client"
-import { authClient } from "@/lib/auth-client";
+// import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 
 function CabinDetailsButton  ({id}:{id:string})  {
   const router = useRouter()
   
-  async function handleReservationDetails(){
+  function handleReservationDetails(){
     // /cabins/${id}
-    const { data: session } = await authClient.getSession();
-    if(!session) router.push("/auth/sign-in")
+    // const { data: session } = await authClient.getSession();
+    // if(!session) router.push("/auth/sign-in")
     router.push(`/cabins/${id}`);
     
   }
