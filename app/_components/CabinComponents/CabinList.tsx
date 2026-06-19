@@ -1,6 +1,6 @@
 import CabinCard from "./CabinCard";
 import { Cabin } from "@/generated/prisma";
-import { getCabins } from "@/lib/authService";
+import { getCabins } from "@/lib/cabinService";
 import { unstable_noStore as noStore } from "next/cache";
 // import Filter from "./Filter";
 

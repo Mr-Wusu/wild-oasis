@@ -1,5 +1,4 @@
-import { registerUser } from "@/lib/authService";
-
+import { registerUser } from "@/lib/cabinService";
 
 // First time single user creation for admin
 // async function main() {
@@ -17,8 +16,6 @@ import { registerUser } from "@/lib/authService";
 //   console.error("❌ Error:", e.message);
 //   process.exit(1);
 // });
-
-
 
 const testUsers = [
   {
@@ -47,7 +44,9 @@ async function main() {
   const users = await Promise.all(testUsers.map(registerUser));
 
   users.forEach((user) => {
-    console.log(`✅ Created: ${user.firstname} ${user.surname} | ${user.email} | Role: ${user.role}`);
+    console.log(
+      `✅ Created: ${user.firstname} ${user.surname} | ${user.email} | Role: ${user.role}`,
+    );
   });
 
   console.log(`\n🎉 Done! ${users.length} users created.`);

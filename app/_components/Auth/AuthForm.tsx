@@ -11,7 +11,7 @@ type AuthFormProps = {
   mode: "sign-in" | "sign-up";
 };
 
-export default function SignUpForm({ mode }: AuthFormProps) {
+export default function AuthForm({ mode }: AuthFormProps) {
   const accessType = mode === "sign-up" ? signUpAction : signInAction;
   const [state, formAction, pending] = useActionState(accessType, initialState);
 

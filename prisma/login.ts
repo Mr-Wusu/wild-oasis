@@ -1,6 +1,4 @@
-import { registerUser } from "@/lib/authService";
-
-
+import { registerUser } from "@/lib/cabinService";
 
 async function main() {
   const user = await registerUser({

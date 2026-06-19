@@ -4,6 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "../Logo";
 import { useHomePage } from "@/contexts/homePageContext";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { authClient } from "@/lib/auth-client";
+import Image from "next/image";
+import { ClipLoader } from "react-spinners";
 
 const navLinks = [
   { href: "/cabins", label: "Cabins" },
@@ -11,7 +15,6 @@ const navLinks = [
   { href: "/account", label: "Account" },
   { href: "/guests", label: "Guest Area" },
 ];
-
 
 const staggerDelays = [
   "delay-[80ms]",
@@ -25,11 +28,19 @@ function NavbarClient() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [prevPathname, setPrevPathname] = useState(pathname);
+  const { data: session, isPending, refetch } = authClient.useSession();
+  console.log(session, isPending);
 
   if (prevPathname !== pathname) {
     setPrevPathname(pathname);
-    if(menuOpen) setMenuOpen(false);
+    if (menuOpen) setMenuOpen(false);
   }
+
+  useEffect(() => {
+  if (pathname === "/account" || pathname === "/cabins") {
+    refetch();
+  }
+}, [pathname, refetch]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -81,6 +92,36 @@ function NavbarClient() {
             </li>
           ))}
         </ul>
+        {session ? (
+          <div className="flex">
+            {session.user.image ? (
+              <div className="h-10 w-10 rounded-full relative overflow-hidden">
+                <Image
+                  alt={`${session.user.firstname}'s profile photo`}
+                  src={session.user.image}
+                  fill
+                />
+              </div>
+            ) : (
+              <div className="h-10 w-10 rounded-full flex items-center justify-center bg-primary-5 text-primary-1 cursor-pointer">
+                {`${session.user.name[0]}${session.user.name.split(" ")[1][0]}`}
+              </div>
+            )}
+
+            <div className="rounded-full h-5 w-5 bg-primary-5 border-2 border-primary-1 self-end -ml-3.5 mt-6 cursor-pointer text-primary-1">
+              <IoMdArrowDropdown className="h-4 w-4" />
+            </div>
+          </div>
+        ) : isPending ? (
+          <ClipLoader
+            color="#D92D2C"
+            size={23}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        ) : (
+          <Link href="/auth/sign-in" className="bg-primary-8 px-2.5 py-1.5 font-josefineSans text-lg text-primary-1 rounded-sm shadow-sm shadow-black/10 hover:bg-primary-7 transition-colors duration-300 ease-in-out">Sign in</Link>
+        )}
 
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
@@ -146,7 +187,6 @@ function NavbarClient() {
           {navLinks.map(({ href, label }, index) => (
             <li
               key={href}
-              // ✅ Fix: Tailwind arbitrary class replaces inline style entirely
               className={`
                 transition-all duration-300
                 ${

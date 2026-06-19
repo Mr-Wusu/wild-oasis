@@ -3,7 +3,7 @@ import {
   getCabinById,
   getBookedDatesByCabinId,
   getSettings,
-} from "@/lib/authService";
+} from "@/lib/cabinService";
 import { UsersIcon, MapPinIcon } from "@heroicons/react/24/solid";
 import BackArrow from "@/app/_components/CabinComponents/BackArrow";
 import { Suspense } from "react";

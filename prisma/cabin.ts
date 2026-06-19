@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import path from "path";
-import { createCabin } from "@/lib/authService";
+import { createCabin } from "@/lib/cabinService";
 
 // ─── Cloudinary Config ────────────────────────────────────────────────────────
 cloudinary.config({

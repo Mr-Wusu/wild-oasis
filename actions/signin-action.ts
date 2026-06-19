@@ -13,6 +13,7 @@ export async function signInAction(_prevState: unknown, formData: FormData) {
       body: {
         email,
         password,
+        rememberMe: false
       },
       headers: await headers(),
     });

@@ -1,4 +1,4 @@
-import { getCabinById } from "@/lib/authService";
+import { getCabinById } from "@/lib/cabinService";
 import ReservationButton from "../Reservations/ReservationButton";
 import { getSession } from "@/lib/auth-getSession";
 import Link from "next/link";
@@ -11,7 +11,12 @@ async function BookingInfo({ cabinId }: { cabinId: string }) {
     return (
       <div className="w-full lg:w-2/5 bg-primary-3 h-fit py-20 px-15 rounded-md overflow-hidden self-center p-4 flex flex-col gap-4 items-center content-center">
         <h2>Please login to reserve a cabin</h2>
-        <Link className="bg-primary-8 py-2 px-3 text-primary-1 rounded-sm shadow-lg shadow-primary-4 hover:bg-primary-6 transition-colors duration-300 ease-in-out w-fit" href="/auth/sign-in">Signin &rarr;</Link>
+        <Link
+          className="bg-primary-8 py-2 px-3 text-primary-1 rounded-sm shadow-lg shadow-primary-4 hover:bg-primary-6 transition-colors duration-300 ease-in-out w-fit"
+          href="/auth/sign-in"
+        >
+          Signin &rarr;
+        </Link>
       </div>
     );
 
